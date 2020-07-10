@@ -2,6 +2,7 @@
 
 namespace QcloudIM\Api;
 
+use QcloudIM\Constants;
 use QcloudIM\Model\SendGroupMsgItem;
 use QcloudIM\Traits\HttpClientTrait;
 
@@ -24,7 +25,7 @@ class GroupMessage
         $r = $this->httpClient->postJson('group_open_http_svc/delete_group_msg_by_sender', [
             'GroupId' => $groupId, 'Sender_Account' => $accountId
         ]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -42,7 +43,7 @@ class GroupMessage
         $r = $this->httpClient->postJson('group_open_http_svc/set_unread_msg_num', [
             'GroupId' => $groupId, 'Member_Account' => $accountId, 'UnreadMsgNum' => $unreadMsgNum
         ]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -59,7 +60,7 @@ class GroupMessage
         $r = $this->httpClient->postJson('group_open_http_svc/forbid_send_msg', [
             'GroupId' => $groupId, 'Members_Account' => $membersAccount, 'ShutUpTime' => $shutUpTime
         ]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -148,7 +149,7 @@ class GroupMessage
         $p = ['GroupId' => $groupId, 'Content' => $content,];
         empty($toMembersAccount) or $p['ToMembers_Account'] = $toMembersAccount;
         $r = $this->httpClient->postJson('group_open_http_svc/send_group_system_notification', $p);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
 }

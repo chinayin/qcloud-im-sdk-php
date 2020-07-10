@@ -3,6 +3,7 @@
 namespace QcloudIM\Api;
 
 use Psr\Log\InvalidArgumentException;
+use QcloudIM\Constants;
 use QcloudIM\Model\SendChatMsgItem;
 use QcloudIM\Traits\HttpClientTrait;
 
@@ -62,7 +63,7 @@ class ChatMessage
             'To_Account' => $toAccountId,
             'MsgKey' => $msgKey,
         ]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -109,7 +110,7 @@ class ChatMessage
     {
         $p = ['To_Account' => $toAccountId] + (array)$item;
         $r = $this->httpClient->postJson('openim/importmsg', $p);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
 }

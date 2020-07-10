@@ -3,6 +3,7 @@
 namespace QcloudIM\Api;
 
 use Psr\Log\InvalidArgumentException;
+use QcloudIM\Constants;
 use QcloudIM\Traits\HttpClientTrait;
 
 /**
@@ -56,7 +57,7 @@ class Account
         $r = $this->httpClient->postJson('im_open_login_svc/kick', [
             'Identifier' => $accountId
         ]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -111,7 +112,7 @@ class Account
             'Nick' => $nick,
             'FaceUrl' => $faceUrl,
         ]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**

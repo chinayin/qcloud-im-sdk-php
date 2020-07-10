@@ -3,6 +3,7 @@
 namespace QcloudIM\Api;
 
 use Psr\Log\InvalidArgumentException;
+use QcloudIM\Constants;
 use QcloudIM\Model\CreateGroupItem;
 use QcloudIM\Model\GroupMemberInfoResponseFilter;
 use QcloudIM\Model\GroupResponseFilter;
@@ -80,7 +81,7 @@ class Group
     {
         $item->setGroupId($groupId);
         $r = $this->httpClient->postJson('group_open_http_svc/modify_group_base_info', (array)$item);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -93,7 +94,7 @@ class Group
     public function destroy(string $groupId): bool
     {
         $r = $this->httpClient->postJson('group_open_http_svc/destroy_group', ['GroupId' => $groupId]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -110,7 +111,7 @@ class Group
         $r = $this->httpClient->postJson('group_open_http_svc/change_group_owner', [
             'GroupId' => $groupId, 'NewOwner_Account' => $newOwnerAccountId
         ]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -179,7 +180,7 @@ class Group
     public function modifyGroupMemberInfo(ModifyGroupMemberInfoItem $item): bool
     {
         $r = $this->httpClient->postJson('group_open_http_svc/modify_group_member_info', (array)$item);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
@@ -222,7 +223,7 @@ class Group
             'MemberToDel_Account' => array_map(function ($v) { return ['Member_Account' => $v]; }, $accountIds),
             'Silence' => $silence ? 1 : 0
         ]);
-        return $r['ActionStatus'] === 'OK';
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
     /**
