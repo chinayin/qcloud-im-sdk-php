@@ -1,0 +1,20 @@
+language: php
+os: linux
+dist: bionic
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+jobs:
+  fast_finish: true
+  include:
+    - php: 7.2
+    - php: 7.3
+    - php: 7.4
+
+install:
+  - if [ "$deps" == "low" ]; then travis_retry composer update --prefer-dist --prefer-lowest --prefer-stable; fi
+  - if [ "$deps" != "low" ]; then travis_retry composer install --prefer-dist; fi
+
+script: composer travis
