@@ -14,6 +14,12 @@ class Constants
     /** @var int 重试次数 */
     const SDK_RETRY_MAX_RETRIES = 1;
 
+    /** @var string 后台接口返回类型 */
+    const ACTION_STATUS_OK = 'OK';
+    const ACTION_STATUS_FAIL = 'FAIL';
+    /** @var int 自定义后台接口返回错误 */
+    const ERROR_CODE_CUSTOM = 99999;
+
     /** @var string  昵称 长度不得超过500个字节 */
     const TAG_PROFILE_IM_NICK = 'Tag_Profile_IM_Nick';
     /** @var string  性别
@@ -104,13 +110,61 @@ class Constants
     /** @var string 群组形态，AVChatRoom（直播群） */
     const GROUP_TYPE_AV_CHATROOM = 'AVChatRoom';
 
-    /** @var string 消息类型，TIMTextElem(文本消息) */
-    const MSG_TYPE_TIM_TEXT = 'TIMTextElem';
-    /** @var string 消息类型，TIMFaceElem(表情消息) */
-    const MSG_TYPE_TIM_FACE = 'TIMFaceElem';
-    /** @var string 消息类型，TIMLocationElem(位置消息) */
-    const MSG_TYPE_TIM_LOCATION = 'TIMLocationElem';
-    /** @var string 消息类型，TIMCustomElem(自定义消息) */
-    const MSG_TYPE_TIM_CUSTOM = 'TIMCustomElem';
+    /** @var string 表示单向加好友 */
+    const FRIEND_ADD_TYPE_SIGNLE = 'Add_Type_Single';
+    /** @var string 表示双向加好友 */
+    const FRIEND_ADD_TYPE_BOTH = 'Add_Type_Both';
+
+    /** @var string 好友分组
+     * 1. 最多支持 32 个分组；
+     * 2. 不允许分组名为空；
+     * 3. 分组名长度不得超过 30 个字节；
+     * 4. 同一个好友可以有多个不同的分组*/
+    const TAG_SNS_IM_GROUP = 'Tag_SNS_IM_Group';
+    /** @var string  好友备注 备注长度最长不得超过 96 个字节 */
+    const TAG_SNS_IM_REMARK = 'Tag_SNS_IM_Remark';
+    /** @var string  加好友来源
+     * 1. 加好友来源字段包含前缀和关键字两部分；
+     * 2. 加好友来源字段的前缀是：AddSource_Type_ ；
+     * 3. 关键字：必须是英文字母，且长度不得超过 8 字节，建议用一个英文单词或该英文单词的缩写；
+     * 4. 示例：加好友来源的关键字是 Android，则加好友来源字段是：AddSource_Type_Android*/
+    const TAG_SNS_IM_ADDSOURCE = 'Tag_SNS_IM_AddSource';
+    /** @var string  加好友附言 加好友附言的长度最长不得超过 256 个字节 */
+    const TAG_SNS_IM_ADDWORDING = 'Tag_SNS_IM_AddWording';
+    /** @var string 自定义好友字段的前缀  关键字：必须是英文字母，且长度不得超过 8 字节，建议用一个英文单词或该英文单词的缩写 */
+    const TAG_SNS_CUSTOM_PREFIX = 'Tag_SNS_Custom';
+
+    /** @var string 消息类型，文本 */
+    const MSG_ELEMENT_TYPE_TEXT = 'TIMTextElem';
+    /** @var string 消息类型，表情 */
+    const MSG_ELEMENT_TYPE_FACE = 'TIMFaceElem';
+    /** @var string 消息类型，图片 */
+    const MSG_ELEMENT_TYPE_IMAGE = 'TIMImageElem';
+    /** @var string 消息类型，自定义 */
+    const MSG_ELEMENT_TYPE_CUSTOM = 'TIMCustomElem';
+    /** @var string 消息类型，语音(只支持显示) */
+    const MSG_ELEMENT_TYPE_SOUND = 'TIMSoundElem';
+    /** @var string 消息类型，文件(只支持显示) */
+    const MSG_ELEMENT_TYPE_FILE = 'TIMFileElem';
+    /** @var string 消息类型，地理位置 */
+    const MSG_ELEMENT_TYPE_LOCATION = 'TIMLocationElem';
+    /** @var string 消息类型，群提示消息(只支持显示) */
+    const MSG_ELEMENT_TYPE_GROUP_TIP = 'TIMGroupTipElem';
+
+    /** @var int 图片类型，原图 */
+    const IMAGE_TYPE_ORIGIN = 1;
+    /** @var int 图片类型，缩略大图 */
+    const IMAGE_TYPE_LARGE = 2;
+    /** @var int 图片类型，缩略小图 */
+    const IMAGE_TYPE_SMALL = 3;
+
+    /** @var int 图片格式 */
+    const IMAGE_FORMAT_JPG = 0x1;
+    const IMAGE_FORMAT_JPEG = 0x1;
+    const IMAGE_FORMAT_GIF = 0x2;
+    const IMAGE_FORMAT_PNG = 0x3;
+    const IMAGE_FORMAT_BMP = 0x4;
+    const IMAGE_FORMAT_UNKNOWN = 0xff;
 
 }
+
