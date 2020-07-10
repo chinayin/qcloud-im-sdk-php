@@ -9,7 +9,7 @@ version="$1"
 
 #### Build new changelog
 {
-  echo "# CHANGELOG \n"
+  echo ""
   echo "## $version - $(date +%Y-%m-%d)"
   echo "----"
 } >>CHANGELOG.md.0
