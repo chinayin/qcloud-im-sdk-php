@@ -74,22 +74,22 @@ class Middleware
             if ($retries >= Constants::SDK_RETRY_MAX_RETRIES) {
                 return false;
             }
-            if ($exception instanceof ConnectException) {
+            if (
+                ($exception instanceof ConnectException)
+                or ($response && $response->getStatusCode() >= 500)
+            ) {
+                $logger->warning(sprintf(
+                    'Retrying %s %s %s/%s, %s',
+                    $request->getMethod(),
+                    $request->getUri(),
+                    $retries + 1,
+                    Constants::SDK_RETRY_MAX_RETRIES,
+                    $response ? 'status code: ' . $response->getStatusCode() : $exception->getMessage()
+                ), [
+                    $request->getHeader('Host')[0]
+                ]);
                 return true;
             }
-            if ($response && $response->getStatusCode() >= 500) {
-                return true;
-            }
-            $logger->warning(sprintf(
-                'Retrying %s %s %s/%s, %s',
-                $request->getMethod(),
-                $request->getUri(),
-                $retries + 1,
-                Constants::SDK_RETRY_MAX_RETRIES,
-                $response ? 'status code: ' . $response->getStatusCode() : $exception->getMessage()
-            ), [
-                $request->getHeader('Host')[0]
-            ]);
             return false;
         });
     }

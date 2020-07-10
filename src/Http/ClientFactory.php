@@ -21,8 +21,8 @@ class ClientFactory
         $stack = HandlerStack::create();
 
         $stack->push(Middleware::log($logger));
-        $stack->push(Middleware::retry($logger));
         $stack->push(Middleware::useragent());
+        $stack->push(Middleware::retry($logger));
         $stack->push(Middleware::response());
 
         if ($token instanceof Token) {
