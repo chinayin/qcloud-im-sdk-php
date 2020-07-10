@@ -13,7 +13,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $
         $this->app = new App([
             'sdkappid' => getenv('SDK_APPID'),
             'secret' => getenv('SDK_SECRET'),

@@ -114,6 +114,8 @@ class Constants
     const FRIEND_ADD_TYPE_SIGNLE = 'Add_Type_Single';
     /** @var string 表示双向加好友 */
     const FRIEND_ADD_TYPE_BOTH = 'Add_Type_Both';
+    /** @var string 添加好友来源前缀 */
+    const ADD_SOURCE_TYPE_PREFIX = 'AddSource_Type_';
 
     /** @var string 好友分组
      * 1. 最多支持 32 个分组；
