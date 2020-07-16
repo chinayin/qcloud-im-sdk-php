@@ -192,7 +192,7 @@ class Group
      *
      * @return array
      */
-    public function addGroupMember(string $groupId, array $accountIds, bool $silence = false): array
+    public function addGroupMember(string $groupId, array $accountIds, bool $silence = true): array
     {
         $r = $this->httpClient->postJson('group_open_http_svc/add_group_member', [
             'GroupId' => $groupId,
