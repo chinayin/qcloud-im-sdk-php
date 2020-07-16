@@ -152,35 +152,35 @@ class ImportAddFriendItem
     /**
      * @return array
      */
-    public function getCustomItem(): array
-    {
-        return $this->CustomItem;
-    }
-
-    /**
-     * @param array $CustomItem
-     */
-    public function setCustomItem(array $CustomItem): void
-    {
-        $this->CustomItem = $CustomItem;
-    }
-
-    /**
-     * @param TagValueItem $item
-     */
-    public function addCustomItem(TagValueItem $item): void
-    {
-        is_array($this->CustomItem) or $this->CustomItem = [];
-        $this->CustomItem[] = $item;
-    }
-
-    /**
-     * @param string $key
-     * @param        $value
-     */
-    public function addCustomItemValue(string $key, $value): void
-    {
-        $this->addCustomItem(new TagValueItem($key, $value));
-    }
+//    public function getCustomItem(): array
+//    {
+//        return $this->CustomItem;
+//    }
+//
+//    /**
+//     * @param array $CustomItem
+//     */
+//    public function setCustomItem(array $CustomItem): void
+//    {
+//        $this->CustomItem = $CustomItem;
+//    }
+//
+//    /**
+//     * @param TagValueItem $item
+//     */
+//    public function addCustomItem(TagValueItem $item): void
+//    {
+//        is_array($this->CustomItem) or $this->CustomItem = [];
+//        $this->CustomItem[] = $item;
+//    }
+//
+//    /**
+//     * @param string $key
+//     * @param        $value
+//     */
+//    public function addCustomItemValue(string $key, $value): void
+//    {
+//        $this->addCustomItem(new TagValueItem($key, $value));
+//    }
 
 }
