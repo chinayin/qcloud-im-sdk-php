@@ -117,6 +117,11 @@ class Constants
     /** @var string 添加好友来源前缀 */
     const ADD_SOURCE_TYPE_PREFIX = 'AddSource_Type_';
 
+    /** @var string 表示单向删好友 */
+    const FRIEND_DELETE_TYPE_SIGNLE = 'Delete_Type_Single';
+    /** @var string 表示双向删好友 */
+    const FRIEND_DELETE_TYPE_BOTH = 'Delete_Type_Both';
+
     /** @var string 好友分组
      * 1. 最多支持 32 个分组；
      * 2. 不允许分组名为空；

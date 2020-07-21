@@ -47,6 +47,13 @@ class FriendTest extends TestCase
         $this->assertNotEmpty($r);
     }
 
+    public function testDelete()
+    {
+        $r = $this->friend->delete('CUST_63518', ['CUST_72923']);
+        var_dump($r);
+        $this->assertNotEmpty($r);
+    }
+
     public function testImport()
     {
         $array = [
