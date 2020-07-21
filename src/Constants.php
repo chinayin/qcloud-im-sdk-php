@@ -8,7 +8,7 @@ namespace QcloudIM;
 class Constants
 {
     /** @var string sdk版本号 */
-    const SDK_VERSION = '0.1.2';
+    const SDK_VERSION = '0.1.3';
     /** @var string 调用baseuri */
     const SDK_BASE_URI = 'https://console.tim.qq.com/v4/';
     /** @var int 重试次数 */
@@ -116,6 +116,11 @@ class Constants
     const FRIEND_ADD_TYPE_BOTH = 'Add_Type_Both';
     /** @var string 添加好友来源前缀 */
     const ADD_SOURCE_TYPE_PREFIX = 'AddSource_Type_';
+
+    /** @var string 表示单向删好友 */
+    const FRIEND_DELETE_TYPE_SIGNLE = 'Delete_Type_Single';
+    /** @var string 表示双向删好友 */
+    const FRIEND_DELETE_TYPE_BOTH = 'Delete_Type_Both';
 
     /** @var string 好友分组
      * 1. 最多支持 32 个分组；

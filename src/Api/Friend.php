@@ -92,6 +92,27 @@ class Friend
     }
 
     /**
+     * 删除好友
+     *
+     * @param string $fromAccountId
+     * @param array  $toAccountIds
+     * @param string $deleteType
+     *
+     * @return array
+     */
+    public function delete(
+        string $fromAccountId,
+        array $toAccountIds,
+        string $deleteType = Constants::FRIEND_DELETE_TYPE_BOTH
+    ): array {
+        return $this->httpClient->postJson('sns/friend_delete', [
+            'From_Account' => $fromAccountId,
+            'To_Account' => $toAccountIds,
+            'DeleteType' => $deleteType,
+        ]);
+    }
+
+    /**
      * 批量导入好友
      *
      * @param string $fromAccountId
