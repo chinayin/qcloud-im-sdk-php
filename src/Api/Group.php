@@ -48,7 +48,11 @@ class Group
         ];
         null !== $filter and $args['ResponseFilter'] = (array)$filter;
         $r = $this->httpClient->postJson('group_open_http_svc/get_group_info', $args);
-        return $r['GroupInfo'][0];
+        $r = $r['GroupInfo'][0];
+        if ($r['ErrorCode'] !== 0) {
+            throw new \InvalidArgumentException($r['ErrorInfo'], $r['ErrorCode']);
+        }
+        return $r;
     }
 
     /**
@@ -204,6 +208,7 @@ class Group
 
     /**
      * 删除群成员
+     * 传入数组成员，如果在群里都不存在会返回memberlist is empty的错误
      *
      * @param string $groupId
      * @param array  $accountIds
@@ -218,11 +223,16 @@ class Group
         string $reason = '',
         bool $silence = false
     ): bool {
-        $r = $this->httpClient->postJson('group_open_http_svc/delete_group_member', [
+        if (count($accountIds) > 500) {
+            throw new InvalidArgumentException('AccountIds size limit exceeded.', -1);
+        }
+        $p = [
             'GroupId' => $groupId,
-            'MemberToDel_Account' => array_map(function ($v) { return ['Member_Account' => $v]; }, $accountIds),
+            'MemberToDel_Account' => $accountIds,
             'Silence' => $silence ? 1 : 0
-        ]);
+        ];
+        empty($reason) or $p['Reason'] = $reason;
+        $r = $this->httpClient->postJson('group_open_http_svc/delete_group_member', $p);
         return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
