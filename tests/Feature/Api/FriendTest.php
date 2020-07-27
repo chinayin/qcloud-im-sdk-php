@@ -3,8 +3,10 @@
 namespace QcloudIM\Tests\Feature\Api;
 
 use QcloudIM\Api\Friend;
+use QcloudIM\Constants;
 use QcloudIM\Model\AddFriendItem;
 use QcloudIM\Model\ImportAddFriendItem;
+use QcloudIM\Model\TagValueItem;
 use QcloudIM\Tests\TestCase;
 
 class FriendTest extends TestCase
@@ -54,6 +56,32 @@ class FriendTest extends TestCase
         $this->assertNotEmpty($r);
     }
 
+    public function testDeleteAll()
+    {
+        $r = $this->friend->deleteAll('CUST_63518', Constants::FRIEND_DELETE_TYPE_BOTH);
+        $this->assertTrue($r);
+    }
+
+    public function testUpdate()
+    {
+        $array = [
+            new TagValueItem('Tag_SNS_Custom_Identity', '2')
+        ];
+        $r = $this->friend->update('CUST_1010889', 'CUST_1010847', $array);
+        var_dump($r);
+        $this->assertNotEmpty($r);
+    }
+
+    public function testBatchUpdate()
+    {
+        $array = [
+            ['To_Account' => '', 'SnsItem' => ['Tag' => 'tag', 'Value' => 'value']],
+        ];
+        $r = $this->friend->batchUpdate('1234', $array);
+        var_dump($r);
+        $this->assertNotEmpty($r);
+    }
+
     public function testImport()
     {
         $array = [
@@ -61,6 +89,27 @@ class FriendTest extends TestCase
             new ImportAddFriendItem('CUST_155515', 'ios', 1571987540)
         ];
         $r = $this->friend->import('CUST_63518', $array);
+        var_dump($r);
+        $this->assertNotEmpty($r);
+    }
+
+    public function testCheck()
+    {
+        $r = $this->friend->check('CUST_63518', ['CUST_1010847']);
+        var_dump($r);
+        $this->assertNotEmpty($r);
+    }
+
+    public function testAddBlacklist()
+    {
+        $r = $this->friend->addBlacklist('CUST_63518', ['CUST_1010847']);
+        var_dump($r);
+        $this->assertNotEmpty($r);
+    }
+
+    public function testDeleteBlacklist()
+    {
+        $r = $this->friend->deleteBlacklist('CUST_63518', ['CUST_1010847']);
         var_dump($r);
         $this->assertNotEmpty($r);
     }

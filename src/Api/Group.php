@@ -2,7 +2,6 @@
 
 namespace QcloudIM\Api;
 
-use Psr\Log\InvalidArgumentException;
 use QcloudIM\Constants;
 use QcloudIM\Model\CreateGroupItem;
 use QcloudIM\Model\GroupMemberInfoResponseFilter;
@@ -130,7 +129,7 @@ class Group
     public function getRoleInGroup(string $groupId, array $accountIds): array
     {
         if (count($accountIds) > 500) {
-            throw new InvalidArgumentException('AccountIds size limit exceeded.', -1);
+            throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
         $r = $this->httpClient->postJson('group_open_http_svc/get_role_in_group', [
             'GroupId' => $groupId, 'User_Account' => $accountIds
@@ -224,7 +223,7 @@ class Group
         bool $silence = false
     ): bool {
         if (count($accountIds) > 500) {
-            throw new InvalidArgumentException('AccountIds size limit exceeded.', -1);
+            throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
         $p = [
             'GroupId' => $groupId,

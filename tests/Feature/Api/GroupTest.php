@@ -36,7 +36,8 @@ class GroupTest extends TestCase
 
     public function testGet()
     {
-        $groupId = '@TGS#2W7TEZSG3';
+//        $groupId = '@TGS#2W7TEZSG3';
+        $groupId = '@TGS#2J4SZEAEL';
         $filter = new GroupResponseFilter();
         $filter->setGroupBaseInfoFilter([
             "Type",
@@ -110,8 +111,8 @@ class GroupTest extends TestCase
 
     public function testDeleteGroupMember()
     {
-        $groupId = '@TGS#2W7TEZSG3';
-        $accountIds = [];
+        $groupId = '@TGS#1JN6ZNTGQ';
+        $accountIds = ['CUST_72923'];
         $reason = '踢人理由';
         $r = $this->group->deleteGroupMember($groupId, $accountIds, $reason);
         $this->assertTrue($r);
@@ -119,7 +120,7 @@ class GroupTest extends TestCase
 
     public function testGetGroupMemberInfo()
     {
-        $groupId = '@TGS#2W7TEZSG3';
+        $groupId = '@TGS#1JN6ZNTGQ';
         $filter = new GroupMemberInfoResponseFilter();
         $r = $this->group->getGroupMemberInfo($groupId, $filter);
         var_dump($r);
