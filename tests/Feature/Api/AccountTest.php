@@ -39,7 +39,7 @@ class AccountTest extends TestCase
 
     public function testCheck()
     {
-        $r = $this->account->check('CUST_63518');
+        $r = $this->account->check('CUST_1010847');
         var_dump($r);
         $this->assertNotEmpty($r);
     }

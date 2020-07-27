@@ -2,7 +2,6 @@
 
 namespace QcloudIM\Api;
 
-use Psr\Log\InvalidArgumentException;
 use QcloudIM\Constants;
 use QcloudIM\Model\SendChatMsgItem;
 use QcloudIM\Traits\HttpClientTrait;
@@ -40,7 +39,7 @@ class ChatMessage
     public function batchSendMsg(array $toAccountIds, SendChatMsgItem $item): array
     {
         if (count($toAccountIds) > 500) {
-            throw new InvalidArgumentException('ToAccountIds size limit exceeded.', -1);
+            throw new \InvalidArgumentException('ToAccountIds size limit exceeded.', -1);
         }
         $p = ['To_Account' => $toAccountIds] + (array)$item;
         $r = $this->httpClient->postJson('openim/sendmsg', (array)$item);

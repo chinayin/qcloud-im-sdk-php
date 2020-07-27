@@ -122,6 +122,23 @@ class Constants
     /** @var string 表示双向删好友 */
     const FRIEND_DELETE_TYPE_BOTH = 'Delete_Type_Both';
 
+    /** @var string 单向校验好友关系 */
+    const FRIEND_CHECK_TYPE_SIGNLE = 'CheckResult_Type_Single';
+    /** @var string 双向校验好友关系 */
+    const FRIEND_CHECK_TYPE_BOTH = 'CheckResult_Type_Both';
+
+    /** @var string 好友关系结果 */
+    const FRIEND_CHECKRESULT_TYPE_NO_RELATION = 'CheckResult_Type_NoRelation';
+    const FRIEND_CHECKRESULT_TYPE_A_WITH_B = 'CheckResult_Type_AWithB';
+    const FRIEND_CHECKRESULT_TYPE_B_WITH_A = 'CheckResult_Type_BWithA';
+    const FRIEND_CHECKRESULT_TYPE_BOTH_WAY = 'CheckResult_Type_BothWay';
+
+    /** @var string 黑名单关系结果 */
+    const FRIEND_BLACKCHECKRESULT_TYPE_NO = 'BlackCheckResult_Type_NO';
+    const FRIEND_BLACKCHECKRESULT_TYPE_A_WITH_B = 'BlackCheckResult_Type_AWithB';
+    const FRIEND_BLACKCHECKRESULT_TYPE_B_WITH_A = 'BlackCheckResult_Type_BWithA';
+    const FRIEND_BLACKCHECKRESULT_TYPE_BOTH_WAY = 'BlackCheckResult_Type_BothWay';
+
     /** @var string 好友分组
      * 1. 最多支持 32 个分组；
      * 2. 不允许分组名为空；

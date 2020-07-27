@@ -113,6 +113,63 @@ class Friend
     }
 
     /**
+     * 删除所有好友
+     *
+     * @param string $fromAccountId
+     * @param string $deleteType
+     *
+     * @return bool
+     */
+    public function deleteAll(
+        string $fromAccountId,
+        string $deleteType = Constants::FRIEND_DELETE_TYPE_SIGNLE
+    ): bool {
+        $r = $this->httpClient->postJson('sns/friend_delete_all', [
+            'From_Account' => $fromAccountId,
+            'DeleteType' => $deleteType,
+        ]);
+        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
+    }
+
+    /**
+     * 更新好友
+     *
+     * @param string $fromAccountId
+     * @param string $toAccountId
+     * @param array  $items
+     *
+     * @return array
+     */
+    public function update(
+        string $fromAccountId,
+        string $toAccountId,
+        array $items
+    ): array {
+        return $this->httpClient->postJson('sns/friend_update', [
+            'From_Account' => $fromAccountId,
+            'UpdateItem' => [['To_Account' => $toAccountId, 'SnsItem' => (array)$items]],
+        ]);
+    }
+
+    /**
+     * 批量更新好友
+     *
+     * @param string $fromAccountId
+     * @param array  $items
+     *
+     * @return array
+     */
+    public function batchUpdate(
+        string $fromAccountId,
+        array $items
+    ): array {
+        return $this->httpClient->postJson('sns/friend_update', [
+            'From_Account' => $fromAccountId,
+            'UpdateItem' => (array)$items,
+        ]);
+    }
+
+    /**
      * 批量导入好友
      *
      * @param string $fromAccountId
@@ -127,6 +184,30 @@ class Friend
         return $this->httpClient->postJson('sns/friend_import', [
             'From_Account' => $fromAccountId,
             'AddFriendItem' => (array)$friendItems,
+        ]);
+    }
+
+    /**
+     * 校验好友
+     *
+     * @param string $fromAccountId
+     * @param array  $toAccountIds
+     * @param string $checkType
+     *
+     * @return array
+     */
+    public function check(
+        string $fromAccountId,
+        array $toAccountIds,
+        string $checkType = Constants::FRIEND_CHECK_TYPE_BOTH
+    ): array {
+        if (count($toAccountIds) > 1000) {
+            throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
+        }
+        return $this->httpClient->postJson('sns/friend_check', [
+            'From_Account' => $fromAccountId,
+            'To_Account' => $toAccountIds,
+            'CheckType' => $checkType,
         ]);
     }
 

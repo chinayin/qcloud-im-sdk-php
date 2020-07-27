@@ -12,6 +12,7 @@ use Psr\SimpleCache\CacheInterface;
 use QcloudIM\Api\Account;
 use QcloudIM\Api\ChatMessage;
 use QcloudIM\Api\Friend;
+use QcloudIM\Api\FriendBlacklist;
 use QcloudIM\Api\GlobalConfig;
 use QcloudIM\Api\Group;
 use QcloudIM\Api\GroupMessage;
@@ -38,6 +39,7 @@ class App extends ContainerBuilder
         'Account' => Account::class,
         'Profile' => Profile::class,
         'Friend' => Friend::class,
+        'FriendBlacklist' => FriendBlacklist::class,
         'Group' => Group::class,
         'GroupMessage' => GroupMessage::class,
         'ChatMessage' => ChatMessage::class,

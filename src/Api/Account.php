@@ -2,7 +2,6 @@
 
 namespace QcloudIM\Api;
 
-use Psr\Log\InvalidArgumentException;
 use QcloudIM\Constants;
 use QcloudIM\Traits\HttpClientTrait;
 
@@ -88,7 +87,7 @@ class Account
     public function batchQueryState(array $accountIds, bool $isNeedDetail = false): array
     {
         if (count($accountIds) > 500) {
-            throw new InvalidArgumentException('AccountIds size limit exceeded.', -1);
+            throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
         return $this->httpClient->postJson('openim/querystate', [
             'IsNeedDetail' => $isNeedDetail ? 1 : 0,
@@ -125,7 +124,7 @@ class Account
     public function multiImport(array $accountIds)
     {
         if (count($accountIds) > 100) {
-            throw new InvalidArgumentException('AccountIds size limit exceeded.', -1);
+            throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
         return $this->httpClient->postJson('im_open_login_svc/account_import', [
             'Accounts' => $accountIds,
@@ -142,7 +141,7 @@ class Account
     public function delete(array $accountIds)
     {
         if (count($accountIds) > 100) {
-            throw new InvalidArgumentException('AccountIds size limit exceeded.', -1);
+            throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
         $r = $this->httpClient->postJson('im_open_login_svc/account_delete', [
             'DeleteItem' => array_map(function ($v) {
