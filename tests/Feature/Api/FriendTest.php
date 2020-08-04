@@ -100,18 +100,4 @@ class FriendTest extends TestCase
         $this->assertNotEmpty($r);
     }
 
-    public function testAddBlacklist()
-    {
-        $r = $this->friend->addBlacklist('CUST_63518', ['CUST_1010847']);
-        var_dump($r);
-        $this->assertNotEmpty($r);
-    }
-
-    public function testDeleteBlacklist()
-    {
-        $r = $this->friend->deleteBlacklist('CUST_63518', ['CUST_1010847']);
-        var_dump($r);
-        $this->assertNotEmpty($r);
-    }
-
 }
