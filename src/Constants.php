@@ -8,7 +8,7 @@ namespace QcloudIM;
 class Constants
 {
     /** @var string sdk版本号 */
-    const SDK_VERSION = '0.1.4';
+    const SDK_VERSION = '0.1.5';
     /** @var string 调用baseuri */
     const SDK_BASE_URI = 'https://console.tim.qq.com/v4/';
     /** @var int 重试次数 */
