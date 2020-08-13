@@ -30,7 +30,7 @@ class SendGroupMsgItem
     public function __construct(string $GroupId, int $Random = 0)
     {
         $this->GroupId = $GroupId;
-        $this->Random = ($Random === 0 ? rand(1, 999999) : $Random);
+        $this->Random = ($Random === 0 ? rand(100000, 999999) : $Random);
     }
 
     /**

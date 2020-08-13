@@ -40,7 +40,7 @@ class Middleware
                 'sdkappid' => $token->getSdkAppId(),
                 'identifier' => $token->getIdentifier(),
                 'usersig' => $token->get(),
-                'random' => rand(0, 999999),
+                'random' => rand(1, 999999),
                 'contenttype' => 'json',
             ]));
         });
