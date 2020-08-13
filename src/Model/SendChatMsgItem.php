@@ -38,7 +38,7 @@ class SendChatMsgItem
      */
     public function __construct()
     {
-        $this->MsgRandom = rand(1, 999999);
+        $this->MsgRandom = rand(100000, 999999);
     }
 
     /**

@@ -126,7 +126,7 @@ class Account
         if (count($accountIds) > 100) {
             throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
-        return $this->httpClient->postJson('im_open_login_svc/account_import', [
+        return $this->httpClient->postJson('im_open_login_svc/multiaccount_import', [
             'Accounts' => $accountIds,
         ]);
     }
