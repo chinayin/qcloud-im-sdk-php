@@ -6,7 +6,7 @@ class SendChatMsgItem
 {
     /** @var int 消息随机数，由随机函数产生，用于后台定位问题（必填） */
     public $MsgRandom;
-    /** @var array TIM 消息对象类型(必填) */
+    /** @var string TIM 消息对象类型(必填) */
     public $MsgType;
     /** @var array 消息体(必填) */
     public $MsgBody;
@@ -58,17 +58,17 @@ class SendChatMsgItem
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getMsgType(): array
+    public function getMsgType(): string
     {
         return $this->MsgType;
     }
 
     /**
-     * @param array $MsgType
+     * @param string $MsgType
      */
-    public function setMsgType(array $MsgType): void
+    public function setMsgType(string $MsgType): void
     {
         $this->MsgType = $MsgType;
     }
