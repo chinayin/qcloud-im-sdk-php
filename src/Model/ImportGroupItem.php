@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class ImportGroupItem
+class ImportGroupItem extends Model
 {
 
     /** @var string    必填    群名称，最长30字节，使用 UTF-8 编码，1个汉字占3个字节 */

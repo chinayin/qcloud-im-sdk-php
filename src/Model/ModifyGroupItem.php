@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class ModifyGroupItem
+class ModifyGroupItem extends Model
 {
     /** @var string    必填    为了使得群组 ID 更加简单，便于记忆传播，腾讯云支持 App 在通过 REST API 创建群组时 自定义群组 ID */
     public $GroupId;

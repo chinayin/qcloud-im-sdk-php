@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class ModifyGroupMemberInfoItem
+class ModifyGroupMemberInfoItem extends Model
 {
     /** @var string    必填    操作群ID */
     public $GroupId;

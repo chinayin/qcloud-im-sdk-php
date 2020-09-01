@@ -27,7 +27,7 @@ class Group
     public function create(CreateGroupItem $item): string
     {
         $r = $this->httpClient->postJson('group_open_http_svc/create_group',
-            (array)$item
+            $item->toArray()
         );
         return $r['GroupId'] ?? '';
     }
@@ -45,7 +45,7 @@ class Group
         $args = [
             'GroupIdList' => [$groupId]
         ];
-        null !== $filter and $args['ResponseFilter'] = (array)$filter;
+        null !== $filter and $args['ResponseFilter'] = $filter->toArray();
         $r = $this->httpClient->postJson('group_open_http_svc/get_group_info', $args);
         $r = $r['GroupInfo'][0];
         if ($r['ErrorCode'] !== 0) {
@@ -67,7 +67,7 @@ class Group
         $args = [
             'GroupIdList' => $groupIds
         ];
-        null !== $filter and $args['ResponseFilter'] = (array)$filter;
+        null !== $filter and $args['ResponseFilter'] = $filter->toArray();
         $r = $this->httpClient->postJson('group_open_http_svc/get_group_info', $args);
         return $r['GroupInfo'];
     }
@@ -83,7 +83,7 @@ class Group
     public function modify(string $groupId, ModifyGroupItem $item): bool
     {
         $item->setGroupId($groupId);
-        $r = $this->httpClient->postJson('group_open_http_svc/modify_group_base_info', (array)$item);
+        $r = $this->httpClient->postJson('group_open_http_svc/modify_group_base_info', $item->toArray());
         return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
@@ -182,7 +182,7 @@ class Group
      */
     public function modifyGroupMemberInfo(ModifyGroupMemberInfoItem $item): bool
     {
-        $r = $this->httpClient->postJson('group_open_http_svc/modify_group_member_info', (array)$item);
+        $r = $this->httpClient->postJson('group_open_http_svc/modify_group_member_info', $item->toArray());
         return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }
 
@@ -247,7 +247,7 @@ class Group
     {
         $p = ['GroupId' => $groupId,];
         if (null !== $filter) {
-            $p += (array)$filter;
+            $p += $filter->toArray();
         }
         $r = $this->httpClient->postJson('group_open_http_svc/get_group_member_info', $p);
         return $r;
@@ -271,7 +271,7 @@ class Group
     ): array {
         $p = ['GroupId' => $groupId, 'Offset' => $offset, 'Limit' => $limit];
         if (null !== $filter) {
-            $p += (array)$filter;
+            $p += $filter->toArray();
         }
         $r = $this->httpClient->postJson('group_open_http_svc/get_group_member_info', $p);
         return $r;

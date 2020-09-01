@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class KeyValueItem
+class KeyValueItem extends Model
 {
 
     /** @var string */

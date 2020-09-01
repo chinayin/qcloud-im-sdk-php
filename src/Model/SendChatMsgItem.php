@@ -2,14 +2,17 @@
 
 namespace QcloudIM\Model;
 
-class SendChatMsgItem
+class SendChatMsgItem extends Model
 {
+    /** @var string  消息来源帐号 */
+    public $From_Account;
+    /** @var string  消息目标帐号 */
+    public $To_Account;
+
     /** @var int 消息随机数，由随机函数产生，用于后台定位问题（必填） */
     public $MsgRandom;
     /** @var array 消息体(必填) */
     public $MsgBody;
-    /** @var string  消息来源帐号 */
-    public $From_Account;
     /** @var int 消息时间戳，UNIX 时间戳（单位：秒） */
     public $MsgTimeStamp;
 
@@ -147,6 +150,22 @@ class SendChatMsgItem
     public function setOfflinePushInfo(array $OfflinePushInfo): void
     {
         $this->OfflinePushInfo = $OfflinePushInfo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToAccount(): string
+    {
+        return $this->To_Account;
+    }
+
+    /**
+     * @param string $To_Account
+     */
+    public function setToAccount(string $To_Account): void
+    {
+        $this->To_Account = $To_Account;
     }
 
 }

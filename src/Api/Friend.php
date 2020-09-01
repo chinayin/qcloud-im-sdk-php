@@ -36,7 +36,7 @@ class Friend
             'ForceAddFlags' => $forceAddFlags ? 1 : 0,
             'AddType' => $addType,
             'AddFriendItem' => [
-                (array)$item
+                $item->toArray()
             ],
         ];
         return $this->httpClient->postJson('sns/friend_add', $p);

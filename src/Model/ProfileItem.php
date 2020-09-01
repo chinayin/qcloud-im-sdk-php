@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class ProfileItem
+class ProfileItem extends Model
 {
 
     public $Tag;

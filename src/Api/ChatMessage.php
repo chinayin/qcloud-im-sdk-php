@@ -16,14 +16,15 @@ class ChatMessage
     /**
      * 发送单聊消息
      *
+     * @param string          $fromAccountId
      * @param string          $toAccountId
      * @param SendChatMsgItem $item
      *
      * @return string
      */
-    public function sendMsg(string $toAccountId, SendChatMsgItem $item): string
+    public function sendMsg(string $fromAccountId, string $toAccountId, SendChatMsgItem $item): string
     {
-        $p = ['To_Account' => $toAccountId] + (array)$item;
+        $p = ['From_Account' => $fromAccountId, 'To_Account' => $toAccountId] + $item->toArray();
         $r = $this->httpClient->postJson('openim/sendmsg', $p);
         return $r['MsgKey'];
     }
@@ -41,7 +42,7 @@ class ChatMessage
         if (count($toAccountIds) > 500) {
             throw new \InvalidArgumentException('ToAccountIds size limit exceeded.', -1);
         }
-        $p = ['To_Account' => $toAccountIds] + (array)$item;
+        $p = ['To_Account' => $toAccountIds] + $item->toArray();
         $r = $this->httpClient->postJson('openim/sendmsg', (array)$item);
         return $r;
     }
@@ -100,14 +101,15 @@ class ChatMessage
     /**
      * 消息导入
      *
+     * @param string          $fromAccountId
      * @param string          $toAccountId
      * @param SendChatMsgItem $item
      *
      * @return bool
      */
-    public function import(string $toAccountId, SendChatMsgItem $item): bool
+    public function import(string $fromAccountId, string $toAccountId, SendChatMsgItem $item): bool
     {
-        $p = ['To_Account' => $toAccountId] + (array)$item;
+        $p = ['From_Account' => $fromAccountId, 'To_Account' => $toAccountId] + $item->toArray();
         $r = $this->httpClient->postJson('openim/importmsg', $p);
         return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
     }

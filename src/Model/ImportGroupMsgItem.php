@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class ImportGroupMsgItem
+class ImportGroupMsgItem extends Model
 {
     /** @var string 消息发送者 */
     public $From_Account;

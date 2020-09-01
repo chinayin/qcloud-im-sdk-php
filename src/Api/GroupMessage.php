@@ -16,6 +16,7 @@ class GroupMessage
     /**
      * 删除群消息，删除最近1000条消息内某个人发送的消息
      *
+     * @param string $groupId
      * @param string $accountId
      *
      * @return bool
@@ -131,7 +132,7 @@ class GroupMessage
     public function sendGroupMsg(string $groupId, SendGroupMsgItem $item): array
     {
         $item->setGroupId($groupId);
-        $r = $this->httpClient->postJson('group_open_http_svc/send_group_msg', (array)$item);
+        $r = $this->httpClient->postJson('group_open_http_svc/send_group_msg', $item->toArray());
         return $r;
     }
 
