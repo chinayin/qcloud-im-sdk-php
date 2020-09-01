@@ -26,8 +26,8 @@ class FriendTest extends TestCase
 
     public function testAdd()
     {
-        $item = new AddFriendItem('5678', 'ios');
-        $r = $this->friend->add('1234', $item);
+        $item = new AddFriendItem('CUST_1010889', 'ios');
+        $r = $this->friend->add('CUST_1010847', $item, Constants::FRIEND_ADD_TYPE_BOTH);
         var_dump($r);
         $this->assertNotEmpty($r);
     }
@@ -44,7 +44,7 @@ class FriendTest extends TestCase
 
     public function testGet()
     {
-        $r = $this->friend->get('CUST_63518', 0);
+        $r = $this->friend->get('CUST_1010847', 0);
         var_dump($r);
         $this->assertNotEmpty($r);
     }
@@ -65,9 +65,10 @@ class FriendTest extends TestCase
     public function testUpdate()
     {
         $array = [
-            new TagValueItem('Tag_SNS_Custom_Identity', '2')
+            new TagValueItem('Tag_SNS_Custom_Identity', '1')
         ];
-        $r = $this->friend->update('CUST_1010889', 'CUST_1010847', $array);
+//        $r = $this->friend->update('CUST_1010889', 'CUST_1010847', $array);
+        $r = $this->friend->update('CUST_1010847', 'CUST_1010889', $array);
         var_dump($r);
         $this->assertNotEmpty($r);
     }

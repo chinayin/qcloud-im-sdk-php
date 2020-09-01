@@ -4,6 +4,7 @@ namespace QcloudIM\Tests\Feature\Api;
 
 use QcloudIM\Constants;
 use QcloudIM\Model\ProfileItem;
+use QcloudIM\Model\TagValueItem;
 use QcloudIM\Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -41,8 +42,8 @@ class ProfileTest extends TestCase
     public function testSet()
     {
         $data = [
-            new ProfileItem(Constants::TAG_PROFILE_IM_NICK, '田一巴'),
-            new ProfileItem(Constants::TAG_PROFILE_IM_LANGUAGE, 123),
+            new TagValueItem(Constants::TAG_PROFILE_IM_NICK, '田一巴'),
+            new TagValueItem(Constants::TAG_PROFILE_IM_LANGUAGE, 123),
         ];
         $r = $this->profile->set('CUST_63518', $data);
         var_dump($r);
