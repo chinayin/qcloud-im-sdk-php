@@ -32,18 +32,19 @@ class ChatMessage
     /**
      * 批量发单聊消息
      *
+     * @param string          $fromAccountId
      * @param array           $toAccountIds
      * @param SendChatMsgItem $item
      *
      * @return array
      */
-    public function batchSendMsg(array $toAccountIds, SendChatMsgItem $item): array
+    public function batchSendMsg(string $fromAccountId, array $toAccountIds, SendChatMsgItem $item): array
     {
         if (count($toAccountIds) > 500) {
             throw new \InvalidArgumentException('ToAccountIds size limit exceeded.', -1);
         }
-        $p = ['To_Account' => $toAccountIds] + $item->toArray();
-        $r = $this->httpClient->postJson('openim/sendmsg', (array)$item);
+        $p = ['From_Account' => $fromAccountId, 'To_Account' => $toAccountIds] + $item->toArray();
+        $r = $this->httpClient->postJson('openim/batchsendmsg', $p);
         return $r;
     }
 

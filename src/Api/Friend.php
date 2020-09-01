@@ -46,7 +46,7 @@ class Friend
      * 批量添加好友
      *
      * @param string $fromAccountId
-     * @param array  $friendItems
+     * @param array  $items
      * @param bool   $forceAddFlags
      * @param string $addType
      *
@@ -54,7 +54,7 @@ class Friend
      */
     public function batchAdd(
         string $fromAccountId,
-        array $friendItems,
+        array $items,
         bool $forceAddFlags = false,
         string $addType = Constants::FRIEND_ADD_TYPE_BOTH
     ): array {
@@ -62,7 +62,9 @@ class Friend
             'From_Account' => $fromAccountId,
             'ForceAddFlags' => $forceAddFlags ? 1 : 0,
             'AddType' => $addType,
-            'AddFriendItem' => (array)$friendItems,
+            'AddFriendItem' => array_map(function ($v) {
+                return $v->toArray();
+            }, $items),
         ]);
     }
 
@@ -136,18 +138,23 @@ class Friend
      *
      * @param string $fromAccountId
      * @param string $toAccountId
-     * @param array  $items
+     * @param array  $tags
      *
      * @return array
      */
     public function update(
         string $fromAccountId,
         string $toAccountId,
-        array $items
+        array $tags
     ): array {
         return $this->httpClient->postJson('sns/friend_update', [
             'From_Account' => $fromAccountId,
-            'UpdateItem' => [['To_Account' => $toAccountId, 'SnsItem' => (array)$items]],
+            'UpdateItem' => [
+                [
+                    'To_Account' => $toAccountId,
+                    'SnsItem' => array_map(function ($v) { return $v->toArray(); }, $tags)
+                ]
+            ],
         ]);
     }
 
@@ -165,7 +172,12 @@ class Friend
     ): array {
         return $this->httpClient->postJson('sns/friend_update', [
             'From_Account' => $fromAccountId,
-            'UpdateItem' => (array)$items,
+            'UpdateItem' => array_map(function ($v) {
+                return [
+                    'To_Account' => $v['To_Account'],
+                    'SnsItem' => $v['SnsItem']->toArray(),
+                ];
+            }, $items),
         ]);
     }
 
@@ -173,17 +185,17 @@ class Friend
      * 批量导入好友
      *
      * @param string $fromAccountId
-     * @param array  $friendItems
+     * @param array  $items
      *
      * @return array
      */
     public function import(
         string $fromAccountId,
-        array $friendItems
+        array $items
     ): array {
         return $this->httpClient->postJson('sns/friend_import', [
             'From_Account' => $fromAccountId,
-            'AddFriendItem' => (array)$friendItems,
+            'AddFriendItem' => array_map(function ($v) { return $v->toArray(); }, $items),
         ]);
     }
 
