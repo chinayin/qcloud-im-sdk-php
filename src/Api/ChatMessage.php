@@ -3,6 +3,7 @@
 namespace QcloudIM\Api;
 
 use QcloudIM\Constants;
+use QcloudIM\Model\ImportChatMsgItem;
 use QcloudIM\Model\SendChatMsgItem;
 use QcloudIM\Traits\HttpClientTrait;
 
@@ -102,13 +103,13 @@ class ChatMessage
     /**
      * 消息导入
      *
-     * @param string          $fromAccountId
-     * @param string          $toAccountId
-     * @param SendChatMsgItem $item
+     * @param string            $fromAccountId
+     * @param string            $toAccountId
+     * @param ImportChatMsgItem $item
      *
      * @return bool
      */
-    public function import(string $fromAccountId, string $toAccountId, SendChatMsgItem $item): bool
+    public function import(string $fromAccountId, string $toAccountId, ImportChatMsgItem $item): bool
     {
         $p = ['From_Account' => $fromAccountId, 'To_Account' => $toAccountId] + $item->toArray();
         $r = $this->httpClient->postJson('openim/importmsg', $p);

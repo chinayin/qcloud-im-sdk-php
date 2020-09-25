@@ -58,7 +58,7 @@ class ImportGroup
      * 80002表示为消息内容过长，目前支持8000字节的消息，请调整消息长度
      *
      * @param string $groupId
-     * @param array  $messages
+     * @param array  $messages <ImportGroupMsgItem>
      *
      * @return array
      */
