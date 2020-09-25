@@ -10,7 +10,7 @@ class ImportGroupMsgItem extends Model
     public $SendTime;
     /** @var int 消息随机数（可选） */
     public $Random;
-    /** @var string 消息体 */
+    /** @var array 消息体 */
     public $MsgBody;
 
     /**
@@ -70,19 +70,20 @@ class ImportGroupMsgItem extends Model
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getMsgBody(): string
+    public function getMsgBody(): array
     {
         return $this->MsgBody;
     }
 
     /**
-     * @param string $MsgBody
+     * @param array $MsgBody
      */
-    public function setMsgBody(string $MsgBody): void
+    public function setMsgBody(array $MsgBody): void
     {
         $this->MsgBody = $MsgBody;
     }
+
 
 }

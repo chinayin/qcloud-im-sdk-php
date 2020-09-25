@@ -2,8 +2,10 @@
 
 namespace QcloudIM\Tests\Feature\Api;
 
+use GrpcUim\Model\TextMessage;
 use QcloudIM\Api\ImportGroup;
 use QcloudIM\Model\ImportGroupItem;
+use QcloudIM\Model\ImportGroupMsgItem;
 use QcloudIM\Tests\TestCase;
 
 class ImportGroupTest extends TestCase
@@ -40,8 +42,15 @@ class ImportGroupTest extends TestCase
 
     public function testImportGroupMsg()
     {
-        $groupId = '';
-        $messages = [];
+        $groupId = '@TGS#2YEMI7WGJ';
+
+        $msg = new ImportGroupMsgItem();
+        $msg->setFromAccount('CUST_63518');
+        $msg->setSendTime(1601028305);
+        $msg->setMsgBody(json_decode('[{"MsgType":"TIMTextElem","MsgContent":{"Text":"导入消息了吗222?"}}]', true));
+        $messages = [
+            $msg
+        ];
         $r = $this->importGroup->importGroupMsg($groupId, $messages);
         var_dump($r);
         $this->assertNotEmpty($r);
