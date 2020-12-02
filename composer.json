@@ -42,12 +42,12 @@
   },
   "autoload": {
     "psr-4": {
-      "QcloudIM\\": "src/"
+      "QcloudIM\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "QcloudIM\\Tests\\": "tests/"
+      "QcloudIM\\Tests\\": "tests"
     }
   },
   "config": {

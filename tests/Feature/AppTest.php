@@ -2,6 +2,8 @@
 
 namespace QcloudIM\Tests\Feature;
 
+use QcloudIM\Tests\TestCase;
+
 class AppTest extends TestCase
 {
 

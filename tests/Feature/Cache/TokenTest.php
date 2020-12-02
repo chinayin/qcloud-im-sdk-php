@@ -1,6 +1,6 @@
 <?php
 
-namespace QcloudIM\Tests\Cache;
+namespace QcloudIM\Tests\Feature\Cache;
 
 use QcloudIM\Cache\Token;
 use QcloudIM\Tests\TestCase;

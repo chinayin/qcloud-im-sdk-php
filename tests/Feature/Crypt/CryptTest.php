@@ -1,6 +1,6 @@
 <?php
 
-namespace QcloudIM\Tests\Crypt;
+namespace QcloudIM\Tests\Feature\Crypt;
 
 use QcloudIM\Crypt\TLSSigAPIv2;
 use QcloudIM\Tests\TestCase;
