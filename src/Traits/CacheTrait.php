@@ -2,20 +2,22 @@
 
 namespace QcloudIM\Traits;
 
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
 
 
 trait CacheTrait
 {
     /**
-     * @var CacheInterface
+     * @var CacheItemPoolInterface
      */
     protected $cache;
 
     /**
-     * @param CacheInterface $cache
+     * @param CacheItemPoolInterface $cache
      */
-    public function setCache(CacheInterface $cache): void
+    public function setCache(CacheItemPoolInterface $cache): void
     {
         $this->cache = $cache;
     }

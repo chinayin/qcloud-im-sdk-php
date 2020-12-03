@@ -27,15 +27,19 @@ abstract class AbstractCache
      * @param bool $refresh
      *
      * @return mixed
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function get(bool $refresh = false)
     {
         $key = $this->getCacheKey();
-        $value = $this->cache->get($key);
-        if ($refresh || !$value) {
+        $item = $this->cache->getItem($key);
+        if ($refresh || !$item->isHit()) {
             $value = $this->getFromServer();
-            $this->cache->set($key, $value, $this->getCacheExpire());
+            $item->set($value);
+            $item->expiresAfter($this->getCacheExpire());
+            $this->cache->save($item);
+            return $value;
         }
-        return $value;
+        return $item->get();
     }
 }

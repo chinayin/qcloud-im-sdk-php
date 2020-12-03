@@ -7,8 +7,8 @@ use GuzzleHttp\Client;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
-use Psr\SimpleCache\CacheInterface;
 use QcloudIM\Api\Account;
 use QcloudIM\Api\ChatMessage;
 use QcloudIM\Api\Friend;
@@ -21,7 +21,7 @@ use QcloudIM\Api\Profile;
 use QcloudIM\Cache\Token;
 use QcloudIM\Http\ClientFactory;
 use QcloudIM\Http\HttpClient;
-use Symfony\Component\Cache\Simple\FilesystemCache;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -131,10 +131,11 @@ class App extends ContainerBuilder
     private function registerCache(): void
     {
         $cache = $this->config->get('cache');
-        if (is_subclass_of($cache, CacheInterface::class)) {
+        if (is_subclass_of($cache, CacheItemPoolInterface::class)) {
             $this->register('cache', $cache);
         } else {
-            $service = $this->register('cache', FilesystemCache::class);
+            //$service = $this->register('cache', FilesystemCache::class);
+            $service = $this->register('cache', FilesystemAdapter::class);
             if ($cache && isset($cache['path'])) {
                 $service->setArguments(['', 0, $cache['path']]);
             }
