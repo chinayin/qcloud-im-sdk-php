@@ -134,7 +134,6 @@ class App extends ContainerBuilder
         if (is_subclass_of($cache, CacheItemPoolInterface::class)) {
             $this->register('cache', $cache);
         } else {
-            //$service = $this->register('cache', FilesystemCache::class);
             $service = $this->register('cache', FilesystemAdapter::class);
             if ($cache && isset($cache['path'])) {
                 $service->setArguments(['', 0, $cache['path']]);
