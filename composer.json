@@ -1,5 +1,5 @@
 {
-  "name": "puzzle9/qcloud-im-sdk-php",
+  "name": "chinayin/qcloud-im-sdk-php",
   "description": "Qcloud IM SDK for PHP - 腾讯云IM SDK",
   "type": "library",
   "license": "Apache-2.0",
@@ -12,8 +12,8 @@
     "im"
   ],
   "support": {
-    "source": "https://github.com/puzzle9/qcloud-im-sdk-php",
-    "issues": "https://github.com/puzzle9/qcloud-im-sdk-php/issues"
+    "source": "https://github.com/chinayin/qcloud-im-sdk-php",
+    "issues": "https://github.com/chinayin/qcloud-im-sdk-php/issues"
   },
   "authors": [
     {
