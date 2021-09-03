@@ -2,12 +2,11 @@
 
 namespace QcloudIM\Http;
 
+use Psr\Http\Message\StreamInterface;
+
 class Response extends \GuzzleHttp\Psr7\Response
 {
-    /**
-     * @inheritdoc
-     */
-    public function getBody()
+    public function getBody(): StreamInterface
     {
         $stream = parent::getBody();
         $data = json_decode((string)$stream, true);
