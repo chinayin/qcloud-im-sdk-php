@@ -172,11 +172,10 @@ class Group
      */
     public function deleteGroupMember(
         string $groupId,
-        array  $accountIds,
+        array $accountIds,
         string $reason = '',
-        bool   $silence = false
-    ): bool
-    {
+        bool $silence = false
+    ): bool {
         if (count($accountIds) > 500) {
             throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
@@ -208,12 +207,11 @@ class Group
      * 获取群成员详细资料(分页).
      */
     public function getGroupMemberInfoByPage(
-        string                        $groupId,
-        int                           $offset,
-        int                           $limit = 100,
+        string $groupId,
+        int $offset,
+        int $limit = 100,
         GroupMemberInfoResponseFilter $filter = null
-    ): array
-    {
+    ): array {
         $p = ['GroupId' => $groupId, 'Offset' => $offset, 'Limit' => $limit];
         if (null !== $filter) {
             $p += $filter->toArray();

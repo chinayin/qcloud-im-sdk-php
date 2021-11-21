@@ -16,18 +16,17 @@ class Friend
     /**
      * 添加好友.
      *
-     * @param bool $forceAddFlags 管理员强制加好友标记：1表示强制加好友，0表示常规加好友方式
-     * @param string $addType 加好友方式（默认双向加好友方式）：
+     * @param bool   $forceAddFlags 管理员强制加好友标记：1表示强制加好友，0表示常规加好友方式
+     * @param string $addType       加好友方式（默认双向加好友方式）：
      *                              Add_Type_Single 表示单向加好友
      *                              Add_Type_Both 表示双向加好友
      */
     public function add(
-        string        $fromAccountId,
+        string $fromAccountId,
         AddFriendItem $item,
-        bool          $forceAddFlags = false,
-        string        $addType = Constants::FRIEND_ADD_TYPE_BOTH
-    ): array
-    {
+        bool $forceAddFlags = false,
+        string $addType = Constants::FRIEND_ADD_TYPE_BOTH
+    ): array {
         $p = [
             'From_Account' => $fromAccountId,
             'ForceAddFlags' => $forceAddFlags ? 1 : 0,
@@ -45,11 +44,10 @@ class Friend
      */
     public function batchAdd(
         string $fromAccountId,
-        array  $items,
-        bool   $forceAddFlags = false,
+        array $items,
+        bool $forceAddFlags = false,
         string $addType = Constants::FRIEND_ADD_TYPE_BOTH
-    ): array
-    {
+    ): array {
         return $this->httpClient->postJson('sns/friend_add', [
             'From_Account' => $fromAccountId,
             'ForceAddFlags' => $forceAddFlags ? 1 : 0,
@@ -63,17 +61,16 @@ class Friend
     /**
      * 拉取好友.
      *
-     * @param int $StartIndex 分页的起始位置
+     * @param int $StartIndex       分页的起始位置
      * @param int $StandardSequence 上次拉好友数据时返回的 StandardSequence，如果 StandardSequence 字段的值与后台一致，后台不会返回标配好友数据
-     * @param int $CustomSequence 上次拉好友数据时返回的 CustomSequence，如果 CustomSequence 字段的值与后台一致，后台不会返回自定义好友数据
+     * @param int $CustomSequence   上次拉好友数据时返回的 CustomSequence，如果 CustomSequence 字段的值与后台一致，后台不会返回自定义好友数据
      */
     public function get(
         string $fromAccountId,
-        int    $StartIndex,
-        int    $StandardSequence = 0,
-        int    $CustomSequence = 0
-    ): array
-    {
+        int $StartIndex,
+        int $StandardSequence = 0,
+        int $CustomSequence = 0
+    ): array {
         $p = [
             'From_Account' => $fromAccountId,
             'StartIndex' => $StartIndex,
@@ -89,10 +86,9 @@ class Friend
      */
     public function delete(
         string $fromAccountId,
-        array  $toAccountIds,
+        array $toAccountIds,
         string $deleteType = Constants::FRIEND_DELETE_TYPE_BOTH
-    ): array
-    {
+    ): array {
         return $this->httpClient->postJson('sns/friend_delete', [
             'From_Account' => $fromAccountId,
             'To_Account' => $toAccountIds,
@@ -106,8 +102,7 @@ class Friend
     public function deleteAll(
         string $fromAccountId,
         string $deleteType = Constants::FRIEND_DELETE_TYPE_SIGNLE
-    ): bool
-    {
+    ): bool {
         $r = $this->httpClient->postJson('sns/friend_delete_all', [
             'From_Account' => $fromAccountId,
             'DeleteType' => $deleteType,
@@ -122,9 +117,8 @@ class Friend
     public function update(
         string $fromAccountId,
         string $toAccountId,
-        array  $tags
-    ): array
-    {
+        array $tags
+    ): array {
         return $this->httpClient->postJson('sns/friend_update', [
             'From_Account' => $fromAccountId,
             'UpdateItem' => [
@@ -143,9 +137,8 @@ class Friend
      */
     public function batchUpdate(
         string $fromAccountId,
-        array  $items
-    ): array
-    {
+        array $items
+    ): array {
         return $this->httpClient->postJson('sns/friend_update', [
             'From_Account' => $fromAccountId,
             'UpdateItem' => array_map(function ($v) {
@@ -162,9 +155,8 @@ class Friend
      */
     public function import(
         string $fromAccountId,
-        array  $items
-    ): array
-    {
+        array $items
+    ): array {
         return $this->httpClient->postJson('sns/friend_import', [
             'From_Account' => $fromAccountId,
             'AddFriendItem' => array_map(function ($v) {
@@ -178,10 +170,9 @@ class Friend
      */
     public function check(
         string $fromAccountId,
-        array  $toAccountIds,
+        array $toAccountIds,
         string $checkType = Constants::FRIEND_CHECK_TYPE_BOTH
-    ): array
-    {
+    ): array {
         if (count($toAccountIds) > 1000) {
             throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
@@ -212,10 +203,9 @@ class Friend
      */
     public function addGroupAndJoin(
         string $fromAccountId,
-        array  $groupNames,
-        array  $toAccountIds
-    ): array
-    {
+        array $groupNames,
+        array $toAccountIds
+    ): array {
         $p = [
             'From_Account' => $fromAccountId,
             'GroupName' => $groupNames,

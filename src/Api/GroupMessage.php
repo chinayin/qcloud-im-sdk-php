@@ -42,7 +42,7 @@ class GroupMessage
      * 批量禁言和取消禁言
      *
      * @param array $membersAccount 需要禁言的用户帐号，最多支持500个帐号
-     * @param int $shutUpTime 需禁言时间，单位为秒，为0时表示取消禁言
+     * @param int   $shutUpTime     需禁言时间，单位为秒，为0时表示取消禁言
      */
     public function forbidSendMsg(string $groupId, array $membersAccount, int $shutUpTime = 60): bool
     {

@@ -33,8 +33,7 @@ class ImportGroupItem extends Model
     public function __construct(
         string $Type,
         string $Name
-    )
-    {
+    ) {
         $this->Name = $Name;
         $this->Type = $Type;
     }
