@@ -19,7 +19,7 @@ class ImportGroup
     {
         $r = $this->httpClient->postJson(
             'group_open_http_svc/import_group',
-            (array) $item
+            $item->toArray()
         );
 
         return $r['GroupId'] ?? '';

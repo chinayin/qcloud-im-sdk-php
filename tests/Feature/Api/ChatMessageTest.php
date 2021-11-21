@@ -3,6 +3,7 @@
 namespace QcloudIM\Tests\Feature\Api;
 
 use QcloudIM\Api\ChatMessage;
+use QcloudIM\Model\ImportChatMsgItem;
 use QcloudIM\Model\SendChatMsgItem;
 use QcloudIM\Tests\TestCase;
 
@@ -24,18 +25,20 @@ class ChatMessageTest extends TestCase
 
     public function testSendMsg()
     {
+        $fromAccountId = '';
         $toAccountId = '';
         $msg = new SendChatMsgItem();
-        $r = $this->chatMessage->sendMsg($toAccountId, $msg);
+        $r = $this->chatMessage->sendMsg($fromAccountId, $toAccountId, $msg);
         var_dump($r);
         $this->assertNotEmpty($r);
     }
 
     public function testBatchSendMsg()
     {
+        $fromAccountId = '';
         $toAccountIds = [];
         $msg = new SendChatMsgItem();
-        $r = $this->chatMessage->batchSendMsg($toAccountIds, $msg);
+        $r = $this->chatMessage->batchSendMsg($fromAccountId, $toAccountIds, $msg);
         var_dump($r);
         $this->assertNotEmpty($r);
     }
@@ -68,9 +71,11 @@ class ChatMessageTest extends TestCase
 
     public function testImport()
     {
-        $toAccountId = '';
-        $msg = new SendChatMsgItem();
-        $r = $this->chatMessage->import($toAccountId, $msg);
+        $msg = new ImportChatMsgItem();
+        $msg->setMsgTimeStamp(1601012393);
+        $msg->setSyncFromOldSystem(2);
+        $msg->setMsgBody(json_decode('[{"MsgType":"TIMTextElem","MsgContent":{"Text":"导入消息了吗2?"}}]', true));
+        $r = $this->chatMessage->import('CUST_63518', 'CUST_1000396', $msg);
         $this->assertTrue($r);
     }
 

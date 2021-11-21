@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class GroupResponseFilter
+class GroupResponseFilter extends Model
 {
     /** @var array 基础信息字段 */
     public $GroupBaseInfoFilter;

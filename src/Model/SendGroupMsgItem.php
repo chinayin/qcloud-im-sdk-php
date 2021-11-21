@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class SendGroupMsgItem
+class SendGroupMsgItem extends Model
 {
     /** @var string 群ID（必填） */
     public $GroupId;

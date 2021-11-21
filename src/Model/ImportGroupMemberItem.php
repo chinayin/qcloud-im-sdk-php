@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class ImportGroupMemberItem
+class ImportGroupMemberItem extends Model
 {
     /** @var string 要添加的群成员 ID（必填） */
     public $Member_Account;

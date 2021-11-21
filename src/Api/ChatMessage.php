@@ -3,6 +3,7 @@
 namespace QcloudIM\Api;
 
 use QcloudIM\Constants;
+use QcloudIM\Model\ImportChatMsgItem;
 use QcloudIM\Model\SendChatMsgItem;
 use QcloudIM\Traits\HttpClientTrait;
 
@@ -16,9 +17,9 @@ class ChatMessage
     /**
      * 发送单聊消息.
      */
-    public function sendMsg(string $toAccountId, SendChatMsgItem $item): string
+    public function sendMsg(string $fromAccountId, string $toAccountId, SendChatMsgItem $item): string
     {
-        $p = ['To_Account' => $toAccountId] + (array) $item;
+        $p = ['From_Account' => $fromAccountId, 'To_Account' => $toAccountId] + $item->toArray();
         $r = $this->httpClient->postJson('openim/sendmsg', $p);
 
         return $r['MsgKey'];
@@ -27,14 +28,14 @@ class ChatMessage
     /**
      * 批量发单聊消息.
      */
-    public function batchSendMsg(array $toAccountIds, SendChatMsgItem $item): array
+    public function batchSendMsg(string $fromAccountId, array $toAccountIds, SendChatMsgItem $item): array
     {
         if (count($toAccountIds) > 500) {
             throw new \InvalidArgumentException('ToAccountIds size limit exceeded.', -1);
         }
-        $p = ['To_Account' => $toAccountIds] + (array) $item;
+        $p = ['From_Account' => $fromAccountId, 'To_Account' => $toAccountIds] + $item->toArray();
 
-        return $this->httpClient->postJson('openim/sendmsg', (array) $item);
+        return $this->httpClient->postJson('openim/batchsendmsg', $p);
     }
 
     /**
@@ -59,11 +60,12 @@ class ChatMessage
     public function getChatMsg(
         string $fromAccountId,
         string $toAccountId,
-        int $minTime,
-        int $maxTime,
-        int $maxCnt,
+        int    $minTime,
+        int    $maxTime,
+        int    $maxCnt,
         string $lastMsgKey = ''
-    ): array {
+    ): array
+    {
         $p = [
             'From_Account' => $fromAccountId,
             'To_Account' => $toAccountId,
@@ -79,9 +81,9 @@ class ChatMessage
     /**
      * 消息导入.
      */
-    public function import(string $toAccountId, SendChatMsgItem $item): bool
+    public function import(string $fromAccountId, string $toAccountId, ImportChatMsgItem $item): bool
     {
-        $p = ['To_Account' => $toAccountId] + (array) $item;
+        $p = ['From_Account' => $fromAccountId, 'To_Account' => $toAccountId] + $item->toArray();
         $r = $this->httpClient->postJson('openim/importmsg', $p);
 
         return Constants::ACTION_STATUS_OK === $r['ActionStatus'];

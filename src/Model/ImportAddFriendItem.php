@@ -4,7 +4,7 @@ namespace QcloudIM\Model;
 
 use QcloudIM\Constants;
 
-class ImportAddFriendItem
+class ImportAddFriendItem extends Model
 {
     /** @var string */
     public $To_Account;
@@ -73,7 +73,7 @@ class ImportAddFriendItem
 
     public function setAddSource(string $AddSource): void
     {
-        $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX.strtolower($AddSource);
+        $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX . strtolower($AddSource);
     }
 
     public function getAddWording(): string

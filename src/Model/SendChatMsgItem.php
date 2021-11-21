@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class SendChatMsgItem
+class SendChatMsgItem extends Model
 {
     /** @var int 消息随机数，由随机函数产生，用于后台定位问题（必填） */
     public $MsgRandom;

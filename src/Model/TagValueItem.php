@@ -2,7 +2,7 @@
 
 namespace QcloudIM\Model;
 
-class TagValueItem
+class TagValueItem extends Model
 {
     /** @var string */
     public $Tag;

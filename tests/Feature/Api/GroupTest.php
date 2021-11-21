@@ -31,7 +31,7 @@ class GroupTest extends TestCase
     {
         $g = new CreateGroupItem(Constants::GROUP_TYPE_PUBLIC, 'CUST_63518');
         $r = $this->group->create($g);
-        $this->assertTrue($r);
+        $this->assertNotEmpty($r);
     }
 
     public function testGet()
@@ -100,11 +100,8 @@ class GroupTest extends TestCase
 
     public function testAddGroupMember()
     {
-        $groupId = '@TGS#2W7TEZSG3';
-        $accountIds = [];
-//        for ($i = 0; $i < 502; $i++) {
-//            $accountIds[] = 'a' . time();
-//        }
+        $groupId = '@TGS#2YEMI7WGJ';
+        $accountIds = ['CUST_63518', 'CUST_1000396', 'USER_236'];
         $r = $this->group->addGroupMember($groupId, $accountIds);
         $this->assertNotEmpty($r);
     }

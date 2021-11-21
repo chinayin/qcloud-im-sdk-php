@@ -4,7 +4,7 @@ namespace QcloudIM\Model;
 
 use QcloudIM\Constants;
 
-class AddFriendItem
+class AddFriendItem extends Model
 {
     /** @var string */
     public $To_Account;
@@ -15,7 +15,7 @@ class AddFriendItem
     /** @var string From_Account 和 To_Account 形成好友关系时的附言信息 */
     public $AddWording = '';
     /** @var string 不能为空 From_Account 对 To_Account 的分组信息，添加好友时只允许设置一个分组，因此使用 String 类型即可 */
-//    public $GroupName ;
+    public $GroupName;
 
     /**
      * AddFriendItem constructor.
@@ -46,18 +46,15 @@ class AddFriendItem
         $this->Remark = $Remark;
     }
 
-//    public function getGroupName(): string
-//    {
-//        return $this->GroupName;
-//    }
-//
-//    /**
-//     * @param string $GroupName
-//     */
-//    public function setGroupName(string $GroupName): void
-//    {
-//        $this->GroupName = $GroupName;
-//    }
+    public function getGroupName(): string
+    {
+        return $this->GroupName;
+    }
+
+    public function setGroupName(string $GroupName): void
+    {
+        $this->GroupName = $GroupName;
+    }
 
     public function getAddSource(): string
     {
@@ -66,7 +63,7 @@ class AddFriendItem
 
     public function setAddSource(string $AddSource): void
     {
-        $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX.strtolower($AddSource);
+        $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX . strtolower($AddSource);
     }
 
     public function getAddWording(): string

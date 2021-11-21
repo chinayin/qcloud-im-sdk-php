@@ -40,11 +40,11 @@ class Profile
     /**
      * 设置资料.
      */
-    public function set(string $accountId, array $profileItems): array
+    public function set(string $accountId, array $items): array
     {
         return $this->httpClient->postJson('profile/portrait_set', [
             'From_Account' => $accountId,
-            'ProfileItem' => $profileItems,
+            'ProfileItem' => $items,
         ]);
     }
 }
