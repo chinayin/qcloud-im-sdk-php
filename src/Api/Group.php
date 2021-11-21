@@ -24,7 +24,7 @@ class Group
     {
         $r = $this->httpClient->postJson(
             'group_open_http_svc/create_group',
-            (array) $item
+            (array)$item
         );
 
         return $r['GroupId'] ?? '';
@@ -38,7 +38,7 @@ class Group
         $args = [
             'GroupIdList' => [$groupId],
         ];
-        null !== $filter and $args['ResponseFilter'] = (array) $filter;
+        null !== $filter and $args['ResponseFilter'] = (array)$filter;
         $r = $this->httpClient->postJson('group_open_http_svc/get_group_info', $args);
         $r = $r['GroupInfo'][0];
         if (0 !== $r['ErrorCode']) {
@@ -56,7 +56,7 @@ class Group
         $args = [
             'GroupIdList' => $groupIds,
         ];
-        null !== $filter and $args['ResponseFilter'] = (array) $filter;
+        null !== $filter and $args['ResponseFilter'] = (array)$filter;
         $r = $this->httpClient->postJson('group_open_http_svc/get_group_info', $args);
 
         return $r['GroupInfo'];
@@ -68,7 +68,7 @@ class Group
     public function modify(string $groupId, ModifyGroupItem $item): bool
     {
         $item->setGroupId($groupId);
-        $r = $this->httpClient->postJson('group_open_http_svc/modify_group_base_info', (array) $item);
+        $r = $this->httpClient->postJson('group_open_http_svc/modify_group_base_info', (array)$item);
 
         return Constants::ACTION_STATUS_OK === $r['ActionStatus'];
     }
@@ -145,7 +145,7 @@ class Group
      */
     public function modifyGroupMemberInfo(ModifyGroupMemberInfoItem $item): bool
     {
-        $r = $this->httpClient->postJson('group_open_http_svc/modify_group_member_info', (array) $item);
+        $r = $this->httpClient->postJson('group_open_http_svc/modify_group_member_info', (array)$item);
 
         return Constants::ACTION_STATUS_OK === $r['ActionStatus'];
     }
@@ -157,7 +157,9 @@ class Group
     {
         $r = $this->httpClient->postJson('group_open_http_svc/add_group_member', [
             'GroupId' => $groupId,
-            'MemberList' => array_map(function ($v) { return ['Member_Account' => $v]; }, $accountIds),
+            'MemberList' => array_map(function ($v) {
+                return ['Member_Account' => $v];
+            }, $accountIds),
             'Silence' => $silence ? 1 : 0,
         ]);
 
@@ -170,10 +172,11 @@ class Group
      */
     public function deleteGroupMember(
         string $groupId,
-        array $accountIds,
+        array  $accountIds,
         string $reason = '',
-        bool $silence = false
-    ): bool {
+        bool   $silence = false
+    ): bool
+    {
         if (count($accountIds) > 500) {
             throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
@@ -195,7 +198,7 @@ class Group
     {
         $p = ['GroupId' => $groupId];
         if (null !== $filter) {
-            $p += (array) $filter;
+            $p += (array)$filter;
         }
 
         return $this->httpClient->postJson('group_open_http_svc/get_group_member_info', $p);
@@ -205,16 +208,29 @@ class Group
      * 获取群成员详细资料(分页).
      */
     public function getGroupMemberInfoByPage(
-        string $groupId,
-        int $offset,
-        int $limit = 100,
+        string                        $groupId,
+        int                           $offset,
+        int                           $limit = 100,
         GroupMemberInfoResponseFilter $filter = null
-    ): array {
+    ): array
+    {
         $p = ['GroupId' => $groupId, 'Offset' => $offset, 'Limit' => $limit];
         if (null !== $filter) {
-            $p += (array) $filter;
+            $p += (array)$filter;
         }
 
         return $this->httpClient->postJson('group_open_http_svc/get_group_member_info', $p);
+    }
+
+    /**
+     * 获取直播群在线人数.
+     */
+    public function getOnlineMemberNum(string $groupId): int
+    {
+        $r = $this->httpClient->postJson('group_open_http_svc/get_online_member_num', [
+            'GroupId' => $groupId,
+        ]);
+
+        return $r['OnlineMemberNum'];
     }
 }

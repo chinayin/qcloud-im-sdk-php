@@ -189,4 +189,14 @@ class Constants
     public const IMAGE_FORMAT_PNG = 0x3;
     public const IMAGE_FORMAT_BMP = 0x4;
     public const IMAGE_FORMAT_UNKNOWN = 0xFF;
+
+    /** @var string 设置 NoLastMsg 的情况下，表示不更新最近联系人会话 */
+    public const SENDMSGCONTROL_NO_LASTMSG = 'NoLastMsg';
+    /** @var string NoUnread 不计未读，只对单条消息有效。(AVChatRoom 不允许使用) */
+    public const SENDMSGCONTROL_NO_UNREAD = 'NoUnread';
+
+    /** @var string 指定消息的优先级，默认优先级 Normal */
+    public const MSG_PRIORITY_HIGH = 'High';
+    public const MSG_PRIORITY_NORMAL = 'Normal';
+    public const MSG_PRIORITY_LOW = 'Low';
 }

@@ -20,6 +20,12 @@ class SendGroupMsgItem
     public $ForbidCallbackControl;
     /** @var int 1表示消息仅发送在线成员，默认0表示发送所有成员，AVChatRoom(直播群)不支持该参数 */
     public $OnlineOnlyFlag;
+    /** @var array 指定消息不更新最近联系人会话 如果消息中指定 SendMsgControl，设置 NoLastMsg 的情况下，表示不更新最近联系人会话；NoUnread 不计未读，只对单条消息有效。(AVChatRoom 不允许使用)。 */
+    public $SendMsgControl;
+    /** @var array 发送群@消息 */
+    public $GroupAtInfo;
+    /** @var string 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到） */
+    public $CloudCustomData;
 
     /**
      * SendGroupMsgItem constructor.
@@ -108,5 +114,35 @@ class SendGroupMsgItem
     public function setOnlineOnlyFlag(int $OnlineOnlyFlag): void
     {
         $this->OnlineOnlyFlag = $OnlineOnlyFlag;
+    }
+
+    public function getSendMsgControl(): array
+    {
+        return $this->SendMsgControl;
+    }
+
+    public function setSendMsgControl(array $SendMsgControl): void
+    {
+        $this->SendMsgControl = $SendMsgControl;
+    }
+
+    public function getGroupAtInfo(): array
+    {
+        return $this->GroupAtInfo;
+    }
+
+    public function setGroupAtInfo(array $GroupAtInfo): void
+    {
+        $this->GroupAtInfo = $GroupAtInfo;
+    }
+
+    public function getCloudCustomData(): string
+    {
+        return $this->CloudCustomData;
+    }
+
+    public function setCloudCustomData(string $CloudCustomData): void
+    {
+        $this->CloudCustomData = $CloudCustomData;
     }
 }
