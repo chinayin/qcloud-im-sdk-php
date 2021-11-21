@@ -17,7 +17,7 @@ bower_components
 /vendor
 composer.lock
 # PhpCsFixer #
-.php_cs.cache
+.php-cs-fixer.cache
 # Package Files #
 /runtime
 /tests/runtime
