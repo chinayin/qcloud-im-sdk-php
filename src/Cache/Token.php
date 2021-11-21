@@ -8,12 +8,14 @@ use QcloudIM\Traits\SecretTrait;
 
 class Token extends AbstractCache
 {
-    use HttpClientTrait, SecretTrait;
+    use HttpClientTrait;
+    use SecretTrait;
 
     protected function getCacheKey(): string
     {
         $unique = md5("{$this->sdkAppId}__{$this->secret}__{$this->identifier}");
-        return md5('qcloudim.token.' . $unique);
+
+        return md5('qcloudim.token.'.$unique);
     }
 
     protected function getCacheExpire(): int
@@ -22,12 +24,12 @@ class Token extends AbstractCache
     }
 
     /**
-     * @return string
      * @throws \Exception
      */
     protected function getFromServer(): string
     {
         $m = new TLSSigAPIv2($this->sdkAppId, $this->secret);
+
         return $m->genSig($this->identifier, $this->getCacheExpire() + 600);
     }
 }

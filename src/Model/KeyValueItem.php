@@ -4,7 +4,6 @@ namespace QcloudIM\Model;
 
 class KeyValueItem
 {
-
     /** @var string */
     public $Key;
     public $Value;
@@ -12,8 +11,7 @@ class KeyValueItem
     /**
      * KeyValueItem constructor.
      *
-     * @param string $Key
-     * @param        $Value
+     * @param $Value
      */
     public function __construct(string $Key, $Value)
     {
@@ -21,17 +19,11 @@ class KeyValueItem
         $this->Value = $Value;
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return $this->Key;
     }
 
-    /**
-     * @param string $Key
-     */
     public function setKey(string $Key): void
     {
         $this->Key = $Key;
@@ -52,5 +44,4 @@ class KeyValueItem
     {
         $this->Value = $Value;
     }
-
 }

@@ -9,25 +9,9 @@ abstract class AbstractCache
     use CacheTrait;
 
     /**
-     * @return string
-     */
-    abstract protected function getCacheKey(): string;
-
-    /**
-     * @return int
-     */
-    abstract protected function getCacheExpire(): int;
-
-    /**
-     * @return mixed
-     */
-    abstract protected function getFromServer();
-
-    /**
-     * @param bool $refresh
+     * @throws \Psr\Cache\InvalidArgumentException
      *
      * @return mixed
-     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function get(bool $refresh = false)
     {
@@ -38,8 +22,19 @@ abstract class AbstractCache
             $item->set($value);
             $item->expiresAfter($this->getCacheExpire());
             $this->cache->save($item);
+
             return $value;
         }
+
         return $item->get();
     }
+
+    abstract protected function getCacheKey(): string;
+
+    abstract protected function getCacheExpire(): int;
+
+    /**
+     * @return mixed
+     */
+    abstract protected function getFromServer();
 }

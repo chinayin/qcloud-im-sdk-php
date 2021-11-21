@@ -16,24 +16,21 @@ use QcloudIM\Constants;
 
 class Middleware
 {
-    /**
-     * @return callable
-     */
-    public static function useragent()
+    public static function useragent(): callable
     {
         return \GuzzleHttp\Middleware::mapRequest(function (RequestInterface $request) {
-            return $request->withHeader('User-Agent', sprintf('QcloudIMSdk (%s %s; %s)) Client/%s PHP/%s',
-                \PHP_OS, php_uname('r'), php_uname('m')
-                , Constants::SDK_VERSION, \PHP_VERSION));
+            return $request->withHeader('User-Agent', sprintf(
+                'QcloudIMSdk (%s %s; %s)) Client/%s PHP/%s',
+                \PHP_OS,
+                php_uname('r'),
+                php_uname('m'),
+                Constants::SDK_VERSION,
+                \PHP_VERSION
+            ));
         });
     }
 
-    /**
-     * @param Token $token
-     *
-     * @return callable
-     */
-    public static function auth(Token $token)
+    public static function auth(Token $token): callable
     {
         return \GuzzleHttp\Middleware::mapRequest(function (RequestInterface $request) use ($token) {
             return $request->withUri(Uri::withQueryValues($request->getUri(), [
@@ -46,24 +43,16 @@ class Middleware
         });
     }
 
-    /**
-     * @param LoggerInterface $logger
-     *
-     * @return callable
-     */
-    public static function log(LoggerInterface $logger)
+    public static function log(LoggerInterface $logger): callable
     {
-        return \GuzzleHttp\Middleware::log($logger,
+        return \GuzzleHttp\Middleware::log(
+            $logger,
             new MessageFormatter(MessageFormatter::DEBUG),
-            LogLevel::DEBUG);
+            LogLevel::DEBUG
+        );
     }
 
-    /**
-     * @param LoggerInterface $logger
-     *
-     * @return callable
-     */
-    public static function retry(LoggerInterface $logger)
+    public static function retry(LoggerInterface $logger): callable
     {
         return \GuzzleHttp\Middleware::retry(function (
             $retries,
@@ -84,20 +73,19 @@ class Middleware
                     $request->getUri(),
                     $retries + 1,
                     Constants::SDK_RETRY_MAX_RETRIES,
-                    $response ? 'status code: ' . $response->getStatusCode() : $exception->getMessage()
+                    $response ? 'status code: '.$response->getStatusCode() : $exception->getMessage()
                 ), [
-                    $request->getHeader('Host')[0]
+                    $request->getHeader('Host')[0],
                 ]);
+
                 return true;
             }
+
             return false;
         });
     }
 
-    /**
-     * @return callable
-     */
-    public static function response()
+    public static function response(): callable
     {
         return \GuzzleHttp\Middleware::mapResponse(function (ResponseInterface $response) {
             return new Response(
@@ -109,5 +97,4 @@ class Middleware
             );
         });
     }
-
 }

@@ -4,7 +4,6 @@ namespace QcloudIM\Model;
 
 class TagValueItem
 {
-
     /** @var string */
     public $Tag;
     public $Value;
@@ -12,8 +11,7 @@ class TagValueItem
     /**
      * TagValueItem constructor.
      *
-     * @param string $Tag
-     * @param        $Value
+     * @param $Value
      */
     public function __construct(string $Tag, $Value)
     {
@@ -21,17 +19,11 @@ class TagValueItem
         $this->Value = $Value;
     }
 
-    /**
-     * @return string
-     */
     public function getTag(): string
     {
         return $this->Tag;
     }
 
-    /**
-     * @param string $Tag
-     */
     public function setTag(string $Tag): void
     {
         $this->Tag = $Tag;
@@ -52,5 +44,4 @@ class TagValueItem
     {
         $this->Value = $Value;
     }
-
 }

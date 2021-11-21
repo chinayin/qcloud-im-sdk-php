@@ -4,7 +4,6 @@ namespace QcloudIM\Model;
 
 class ProfileItem
 {
-
     public $Tag;
     public $Value;
 
@@ -51,5 +50,4 @@ class ProfileItem
     {
         $this->Value = $Value;
     }
-
 }

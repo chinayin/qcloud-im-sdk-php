@@ -11,9 +11,6 @@ trait HttpClientTrait
      */
     protected $httpClient;
 
-    /**
-     * @param HttpClientInterface $httpClient
-     */
     public function setHttpClient(HttpClientInterface $httpClient): void
     {
         $this->httpClient = $httpClient;

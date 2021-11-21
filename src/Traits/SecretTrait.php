@@ -4,15 +4,21 @@ namespace QcloudIM\Traits;
 
 trait SecretTrait
 {
-
     /**
      * @var string
      */
     protected $sdkAppId;
 
     /**
-     * @param string $sdkAppId
+     * @var string
      */
+    protected $secret;
+
+    /**
+     * @var string
+     */
+    protected $identifier;
+
     public function setSdkAppId(string $sdkAppId): void
     {
         $this->sdkAppId = $sdkAppId;
@@ -23,27 +29,11 @@ trait SecretTrait
         return $this->sdkAppId;
     }
 
-    /**
-     * @var string
-     */
-    protected $secret;
-
-    /**
-     * @param string $secret
-     */
     public function setSecret(string $secret): void
     {
         $this->secret = $secret;
     }
 
-    /**
-     * @var string
-     */
-    protected $identifier;
-
-    /**
-     * @param string $identifier
-     */
     public function setIdentifier(string $identifier): void
     {
         $this->identifier = $identifier;
@@ -53,5 +43,4 @@ trait SecretTrait
     {
         return $this->identifier;
     }
-
 }

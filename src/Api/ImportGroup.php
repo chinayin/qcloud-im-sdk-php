@@ -6,24 +6,22 @@ use QcloudIM\Model\ImportGroupItem;
 use QcloudIM\Traits\HttpClientTrait;
 
 /**
- * 群组管理(导入相关)
+ * 群组管理(导入相关).
  */
 class ImportGroup
 {
     use HttpClientTrait;
 
     /**
-     * 导入群组
-     *
-     * @param ImportGroupItem $item
-     *
-     * @return string
+     * 导入群组.
      */
     public function import(ImportGroupItem $item): string
     {
-        $r = $this->httpClient->postJson('group_open_http_svc/import_group',
-            (array)$item
+        $r = $this->httpClient->postJson(
+            'group_open_http_svc/import_group',
+            (array) $item
         );
+
         return $r['GroupId'] ?? '';
     }
 
@@ -31,11 +29,6 @@ class ImportGroup
      * 导入群成员
      * 一次请求最多支持添加500个成员
      * 请保证导入成员的入群时间大于群的创建时间并小于当前时间，否则该成员会导入失败。
-     *
-     * @param string $groupId
-     * @param array  $members
-     *
-     * @return array
      */
     public function importGroupMember(string $groupId, array $members): array
     {
@@ -43,6 +36,7 @@ class ImportGroup
             'GroupId' => $groupId,
             'MemberList' => $members,
         ]);
+
         return $r['MemberList'];
     }
 
@@ -55,12 +49,7 @@ class ImportGroup
      * 0表示单条消息成功
      * 10004表示单条消息发送时间无效
      * 80001表示单条消息包含脏字，拒绝存储此消息
-     * 80002表示为消息内容过长，目前支持8000字节的消息，请调整消息长度
-     *
-     * @param string $groupId
-     * @param array  $messages
-     *
-     * @return array
+     * 80002表示为消息内容过长，目前支持8000字节的消息，请调整消息长度.
      */
     public function importGroupMsg(string $groupId, array $messages): array
     {
@@ -68,7 +57,7 @@ class ImportGroup
             'GroupId' => $groupId,
             'MsgList' => $messages,
         ]);
+
         return $r['ImportMsgResult'];
     }
-
 }

@@ -11,12 +11,9 @@ use QcloudIM\Constants;
 class ClientFactory
 {
     /**
-     * @param LoggerInterface $logger
-     * @param Token           $token
-     *
-     * @return Client
+     * @param Token $token
      */
-    public static function create(LoggerInterface $logger, $token = null)
+    public static function create(LoggerInterface $logger, Token $token = null): Client
     {
         $stack = HandlerStack::create();
 
@@ -31,7 +28,7 @@ class ClientFactory
 
         return new Client([
             'base_uri' => Constants::SDK_BASE_URI,
-            'handler' => $stack
+            'handler' => $stack,
         ]);
     }
 }

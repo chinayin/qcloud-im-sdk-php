@@ -6,7 +6,6 @@ use QcloudIM\Constants;
 
 class ImportAddFriendItem
 {
-
     /** @var string */
     public $To_Account;
     /** @var string */
@@ -26,9 +25,6 @@ class ImportAddFriendItem
 
     /**
      * AddFriendItem constructor.
-     *
-     * @param string $To_Account
-     * @param string $AddSource
      */
     public function __construct(string $To_Account, string $AddSource, int $AddTime)
     {
@@ -37,41 +33,26 @@ class ImportAddFriendItem
         $this->AddTime = $AddTime;
     }
 
-    /**
-     * @return string
-     */
     public function getToAccount(): string
     {
         return $this->To_Account;
     }
 
-    /**
-     * @param string $To_Account
-     */
     public function setToAccount(string $To_Account): void
     {
         $this->To_Account = $To_Account;
     }
 
-    /**
-     * @return string
-     */
     public function getRemark(): string
     {
         return $this->Remark;
     }
 
-    /**
-     * @param string $Remark
-     */
     public function setRemark(string $Remark): void
     {
         $this->Remark = $Remark;
     }
 
-    /**
-     * @return string
-     */
 //    public function getGroupName(): string
 //    {
 //        return $this->GroupName;
@@ -85,73 +66,47 @@ class ImportAddFriendItem
 //        $this->GroupName = $GroupName;
 //    }
 
-    /**
-     * @return string
-     */
     public function getAddSource(): string
     {
         return $this->AddSource;
     }
 
-    /**
-     * @param string $AddSource
-     */
     public function setAddSource(string $AddSource): void
     {
-        $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX . strtolower($AddSource);
+        $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX.strtolower($AddSource);
     }
 
-    /**
-     * @return string
-     */
     public function getAddWording(): string
     {
         return $this->AddWording;
     }
 
-    /**
-     * @param string $AddWording
-     */
     public function setAddWording(string $AddWording): void
     {
         $this->AddWording = $AddWording;
     }
 
-    /**
-     * @return int
-     */
     public function getRemarkTime(): int
     {
         return $this->RemarkTime;
     }
 
-    /**
-     * @param int $RemarkTime
-     */
     public function setRemarkTime(int $RemarkTime): void
     {
         $this->RemarkTime = $RemarkTime;
     }
 
-    /**
-     * @return int
-     */
     public function getAddTime(): int
     {
         return $this->AddTime;
     }
 
-    /**
-     * @param int $AddTime
-     */
     public function setAddTime(int $AddTime): void
     {
         $this->AddTime = $AddTime;
     }
 
-    /**
-     * @return array
-     */
+    // @return array
 //    public function getCustomItem(): array
 //    {
 //        return $this->CustomItem;
@@ -182,5 +137,4 @@ class ImportAddFriendItem
 //    {
 //        $this->addCustomItem(new TagValueItem($key, $value));
 //    }
-
 }

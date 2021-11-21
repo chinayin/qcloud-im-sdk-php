@@ -47,9 +47,6 @@ class App extends ContainerBuilder
         'GlobalConfig' => GlobalConfig::class,
     ];
 
-    /**
-     * @param array $config
-     */
     public function __construct(array $config)
     {
         parent::__construct();
@@ -57,9 +54,6 @@ class App extends ContainerBuilder
         $this->registerServices();
     }
 
-    /**
-     * @return void
-     */
     private function registerServices(): void
     {
         $this->registerLogger();
@@ -72,9 +66,6 @@ class App extends ContainerBuilder
         }
     }
 
-    /**
-     * @return void
-     */
     private function registerLogger(): void
     {
         $log = $this->config->get('log');
@@ -82,7 +73,8 @@ class App extends ContainerBuilder
             $this->register('logger', $log);
         } elseif ($log) {
             $this->register('logger_handler', StreamHandler::class)
-                ->setArguments([$log['file'], isset($log['level']) ? $log['level'] : 'debug']);
+                ->setArguments([$log['file'], $log['level'] ?? 'debug'])
+            ;
             $this->registerMonolog();
         } else {
             $this->register('logger_handler', NullHandler::class);
@@ -90,44 +82,37 @@ class App extends ContainerBuilder
         }
     }
 
-    /**
-     * @return void
-     */
     private function registerMonolog(): void
     {
         $this->register('logger', Logger::class)
             ->addArgument('QcloudIM')
             ->addMethodCall('setTimezone', [new \DateTimeZone('PRC')])
-            ->addMethodCall('pushHandler', [new Reference('logger_handler')]);
+            ->addMethodCall('pushHandler', [new Reference('logger_handler')])
+        ;
     }
 
-    /**
-     * @return void
-     */
     private function registerHttpClient(): void
     {
         $this->register('client', Client::class)
             ->addArgument(new Reference('logger'))
-            ->setFactory([ClientFactory::class, 'create']);
+            ->setFactory([ClientFactory::class, 'create'])
+        ;
         $this->register('http_client', HttpClient::class)
-            ->addArgument(new Reference('client'));
+            ->addArgument(new Reference('client'))
+        ;
     }
 
-    /**
-     * @return void
-     */
     private function registerHttpClientWithToken(): void
     {
         $this->register('client_with_token', Client::class)
             ->setArguments([new Reference('logger'), new Reference('token')])
-            ->setFactory([ClientFactory::class, 'create']);
+            ->setFactory([ClientFactory::class, 'create'])
+        ;
         $this->register('http_client_with_token', HttpClient::class)
-            ->addArgument(new Reference('client_with_token'));
+            ->addArgument(new Reference('client_with_token'))
+        ;
     }
 
-    /**
-     * @return void
-     */
     private function registerCache(): void
     {
         $cache = $this->config->get('cache');
@@ -141,9 +126,6 @@ class App extends ContainerBuilder
         }
     }
 
-    /**
-     * @return void
-     */
     private function registerToken(): void
     {
         $this->register('token', Token::class)
@@ -151,19 +133,14 @@ class App extends ContainerBuilder
             ->addMethodCall('setSecret', [$this->config->get('secret')])
             ->addMethodCall('setIdentifier', [$this->config->get('identifier')])
             ->addMethodCall('setCache', [new Reference('cache')])
-            ->addMethodCall('setHttpClient', [new Reference('http_client')]);
+            ->addMethodCall('setHttpClient', [new Reference('http_client')])
+        ;
     }
 
-    /**
-     * @param string $id
-     * @param string $class
-     *
-     * @return void
-     */
     private function registerApi(string $id, string $class): void
     {
         $api = $this->register($id, $class)
-            ->addMethodCall('setHttpClient', [new Reference('http_client_with_token')]);
+            ->addMethodCall('setHttpClient', [new Reference('http_client_with_token')])
+        ;
     }
-
 }

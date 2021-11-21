@@ -12,5 +12,4 @@ class ImportGroupMsgItem
     public $Random;
     /** @var string 消息体 */
     public $MsgBody;
-
 }

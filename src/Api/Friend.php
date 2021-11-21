@@ -7,23 +7,19 @@ use QcloudIM\Model\AddFriendItem;
 use QcloudIM\Traits\HttpClientTrait;
 
 /**
- * 关系链管理(好友)
+ * 关系链管理(好友).
  */
 class Friend
 {
     use HttpClientTrait;
 
     /**
-     * 添加好友
+     * 添加好友.
      *
-     * @param string        $fromAccountId
-     * @param AddFriendItem $item
-     * @param bool          $forceAddFlags 管理员强制加好友标记：1表示强制加好友，0表示常规加好友方式
-     * @param string        $addType       加好友方式（默认双向加好友方式）：
-     *                                     Add_Type_Single 表示单向加好友
-     *                                     Add_Type_Both 表示双向加好友
-     *
-     * @return array
+     * @param bool   $forceAddFlags 管理员强制加好友标记：1表示强制加好友，0表示常规加好友方式
+     * @param string $addType       加好友方式（默认双向加好友方式）：
+     *                              Add_Type_Single 表示单向加好友
+     *                              Add_Type_Both 表示双向加好友
      */
     public function add(
         string $fromAccountId,
@@ -36,21 +32,15 @@ class Friend
             'ForceAddFlags' => $forceAddFlags ? 1 : 0,
             'AddType' => $addType,
             'AddFriendItem' => [
-                (array)$item
+                (array) $item,
             ],
         ];
+
         return $this->httpClient->postJson('sns/friend_add', $p);
     }
 
     /**
-     * 批量添加好友
-     *
-     * @param string $fromAccountId
-     * @param array  $friendItems
-     * @param bool   $forceAddFlags
-     * @param string $addType
-     *
-     * @return array
+     * 批量添加好友.
      */
     public function batchAdd(
         string $fromAccountId,
@@ -62,19 +52,16 @@ class Friend
             'From_Account' => $fromAccountId,
             'ForceAddFlags' => $forceAddFlags ? 1 : 0,
             'AddType' => $addType,
-            'AddFriendItem' => (array)$friendItems,
+            'AddFriendItem' => (array) $friendItems,
         ]);
     }
 
     /**
-     * 拉取好友
+     * 拉取好友.
      *
-     * @param string $fromAccountId
-     * @param int    $StartIndex       分页的起始位置
-     * @param int    $StandardSequence 上次拉好友数据时返回的 StandardSequence，如果 StandardSequence 字段的值与后台一致，后台不会返回标配好友数据
-     * @param int    $CustomSequence   上次拉好友数据时返回的 CustomSequence，如果 CustomSequence 字段的值与后台一致，后台不会返回自定义好友数据
-     *
-     * @return array
+     * @param int $StartIndex       分页的起始位置
+     * @param int $StandardSequence 上次拉好友数据时返回的 StandardSequence，如果 StandardSequence 字段的值与后台一致，后台不会返回标配好友数据
+     * @param int $CustomSequence   上次拉好友数据时返回的 CustomSequence，如果 CustomSequence 字段的值与后台一致，后台不会返回自定义好友数据
      */
     public function get(
         string $fromAccountId,
@@ -88,17 +75,12 @@ class Friend
         ];
         empty($StandardSequence) or $p['StandardSequence'] = $StandardSequence;
         empty($CustomSequence) or $p['CustomSequence'] = $CustomSequence;
+
         return $this->httpClient->postJson('sns/friend_get', $p);
     }
 
     /**
-     * 删除好友
-     *
-     * @param string $fromAccountId
-     * @param array  $toAccountIds
-     * @param string $deleteType
-     *
-     * @return array
+     * 删除好友.
      */
     public function delete(
         string $fromAccountId,
@@ -113,12 +95,7 @@ class Friend
     }
 
     /**
-     * 删除所有好友
-     *
-     * @param string $fromAccountId
-     * @param string $deleteType
-     *
-     * @return bool
+     * 删除所有好友.
      */
     public function deleteAll(
         string $fromAccountId,
@@ -128,17 +105,12 @@ class Friend
             'From_Account' => $fromAccountId,
             'DeleteType' => $deleteType,
         ]);
-        return $r['ActionStatus'] === Constants::ACTION_STATUS_OK;
+
+        return Constants::ACTION_STATUS_OK === $r['ActionStatus'];
     }
 
     /**
-     * 更新好友
-     *
-     * @param string $fromAccountId
-     * @param string $toAccountId
-     * @param array  $items
-     *
-     * @return array
+     * 更新好友.
      */
     public function update(
         string $fromAccountId,
@@ -147,17 +119,12 @@ class Friend
     ): array {
         return $this->httpClient->postJson('sns/friend_update', [
             'From_Account' => $fromAccountId,
-            'UpdateItem' => [['To_Account' => $toAccountId, 'SnsItem' => (array)$items]],
+            'UpdateItem' => [['To_Account' => $toAccountId, 'SnsItem' => (array) $items]],
         ]);
     }
 
     /**
-     * 批量更新好友
-     *
-     * @param string $fromAccountId
-     * @param array  $items
-     *
-     * @return array
+     * 批量更新好友.
      */
     public function batchUpdate(
         string $fromAccountId,
@@ -165,17 +132,12 @@ class Friend
     ): array {
         return $this->httpClient->postJson('sns/friend_update', [
             'From_Account' => $fromAccountId,
-            'UpdateItem' => (array)$items,
+            'UpdateItem' => (array) $items,
         ]);
     }
 
     /**
-     * 批量导入好友
-     *
-     * @param string $fromAccountId
-     * @param array  $friendItems
-     *
-     * @return array
+     * 批量导入好友.
      */
     public function import(
         string $fromAccountId,
@@ -183,18 +145,12 @@ class Friend
     ): array {
         return $this->httpClient->postJson('sns/friend_import', [
             'From_Account' => $fromAccountId,
-            'AddFriendItem' => (array)$friendItems,
+            'AddFriendItem' => (array) $friendItems,
         ]);
     }
 
     /**
-     * 校验好友
-     *
-     * @param string $fromAccountId
-     * @param array  $toAccountIds
-     * @param string $checkType
-     *
-     * @return array
+     * 校验好友.
      */
     public function check(
         string $fromAccountId,
@@ -204,11 +160,11 @@ class Friend
         if (count($toAccountIds) > 1000) {
             throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
+
         return $this->httpClient->postJson('sns/friend_check', [
             'From_Account' => $fromAccountId,
             'To_Account' => $toAccountIds,
             'CheckType' => $checkType,
         ]);
     }
-
 }
