@@ -8,11 +8,6 @@ abstract class AbstractCache
 {
     use CacheTrait;
 
-    /**
-     * @throws \Psr\Cache\InvalidArgumentException
-     *
-     * @return mixed
-     */
     public function get(bool $refresh = false)
     {
         $key = $this->getCacheKey();

@@ -36,8 +36,8 @@ class Middleware
             return $request->withUri(Uri::withQueryValues($request->getUri(), [
                 'sdkappid' => $token->getSdkAppId(),
                 'identifier' => $token->getIdentifier(),
-                'usersig' => $token->get(),
-                'random' => rand(1, 999999),
+                'usersig' => (string)$token->get(),
+                'random' => (string)rand(1, 999999),
                 'contenttype' => 'json',
             ]));
         });
@@ -73,7 +73,7 @@ class Middleware
                     $request->getUri(),
                     $retries + 1,
                     Constants::SDK_RETRY_MAX_RETRIES,
-                    $response ? 'status code: '.$response->getStatusCode() : $exception->getMessage()
+                    $response ? 'status code: ' . $response->getStatusCode() : $exception->getMessage()
                 ), [
                     $request->getHeader('Host')[0],
                 ]);
