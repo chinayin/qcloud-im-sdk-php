@@ -90,7 +90,8 @@ class Group
     public function changeGroupOwner(string $groupId, string $newOwnerAccountId): bool
     {
         $r = $this->httpClient->postJson('group_open_http_svc/change_group_owner', [
-            'GroupId' => $groupId, 'NewOwner_Account' => $newOwnerAccountId,
+            'GroupId' => $groupId,
+            'NewOwner_Account' => $newOwnerAccountId,
         ]);
 
         return Constants::ACTION_STATUS_OK === $r['ActionStatus'];
@@ -108,7 +109,8 @@ class Group
             throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
         $r = $this->httpClient->postJson('group_open_http_svc/get_role_in_group', [
-            'GroupId' => $groupId, 'User_Account' => $accountIds,
+            'GroupId' => $groupId,
+            'User_Account' => $accountIds,
         ]);
 
         return $r['UserIdList'];
@@ -172,11 +174,10 @@ class Group
      */
     public function deleteGroupMember(
         string $groupId,
-        array  $accountIds,
+        array $accountIds,
         string $reason = '',
-        bool   $silence = false
-    ): bool
-    {
+        bool $silence = false
+    ): bool {
         if (count($accountIds) > 500) {
             throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
@@ -210,12 +211,11 @@ class Group
      * 获取群成员详细资料(分页).
      */
     public function getGroupMemberInfoByPage(
-        string                        $groupId,
-        int                           $offset,
-        int                           $limit = 100,
+        string $groupId,
+        int $offset,
+        int $limit = 100,
         GroupMemberInfoResponseFilter $filter = null
-    ): array
-    {
+    ): array {
         $p = ['GroupId' => $groupId, 'Offset' => $offset, 'Limit' => $limit];
         if (null !== $filter) {
             $p += $filter->toArray();

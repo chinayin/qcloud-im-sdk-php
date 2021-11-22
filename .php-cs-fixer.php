@@ -21,7 +21,7 @@ $config->setUsingCache(true)
     ->setRules([
         '@PHP71Migration' => true,
         '@PHPUnit75Migration:risky' => true,
-        '@PhpCsFixer' => true,
+        '@PSR12' => true,
         // one should use PHPUnit built-in method instead
         'general_phpdoc_annotation_remove' => ['annotations' => ['expectedDeprecation']],
         // needs PHP 8+ or polyfill

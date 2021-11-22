@@ -60,12 +60,11 @@ class ChatMessage
     public function getChatMsg(
         string $fromAccountId,
         string $toAccountId,
-        int    $minTime,
-        int    $maxTime,
-        int    $maxCnt,
+        int $minTime,
+        int $maxTime,
+        int $maxCnt,
         string $lastMsgKey = ''
-    ): array
-    {
+    ): array {
         $p = [
             'From_Account' => $fromAccountId,
             'To_Account' => $toAccountId,

@@ -73,8 +73,7 @@ class App extends ContainerBuilder
             $this->register('logger', $log);
         } elseif ($log) {
             $this->register('logger_handler', StreamHandler::class)
-                ->setArguments([$log['file'], $log['level'] ?? 'debug'])
-            ;
+                ->setArguments([$log['file'], $log['level'] ?? 'debug']);
             $this->registerMonolog();
         } else {
             $this->register('logger_handler', NullHandler::class);
@@ -87,30 +86,25 @@ class App extends ContainerBuilder
         $this->register('logger', Logger::class)
             ->addArgument('QcloudIM')
             ->addMethodCall('setTimezone', [new \DateTimeZone('PRC')])
-            ->addMethodCall('pushHandler', [new Reference('logger_handler')])
-        ;
+            ->addMethodCall('pushHandler', [new Reference('logger_handler')]);
     }
 
     private function registerHttpClient(): void
     {
         $this->register('client', Client::class)
             ->addArgument(new Reference('logger'))
-            ->setFactory([ClientFactory::class, 'create'])
-        ;
+            ->setFactory([ClientFactory::class, 'create']);
         $this->register('http_client', HttpClient::class)
-            ->addArgument(new Reference('client'))
-        ;
+            ->addArgument(new Reference('client'));
     }
 
     private function registerHttpClientWithToken(): void
     {
         $this->register('client_with_token', Client::class)
             ->setArguments([new Reference('logger'), new Reference('token')])
-            ->setFactory([ClientFactory::class, 'create'])
-        ;
+            ->setFactory([ClientFactory::class, 'create']);
         $this->register('http_client_with_token', HttpClient::class)
-            ->addArgument(new Reference('client_with_token'))
-        ;
+            ->addArgument(new Reference('client_with_token'));
     }
 
     private function registerCache(): void
@@ -133,14 +127,12 @@ class App extends ContainerBuilder
             ->addMethodCall('setSecret', [$this->config->get('secret')])
             ->addMethodCall('setIdentifier', [$this->config->get('identifier')])
             ->addMethodCall('setCache', [new Reference('cache')])
-            ->addMethodCall('setHttpClient', [new Reference('http_client')])
-        ;
+            ->addMethodCall('setHttpClient', [new Reference('http_client')]);
     }
 
     private function registerApi(string $id, string $class): void
     {
         $api = $this->register($id, $class)
-            ->addMethodCall('setHttpClient', [new Reference('http_client_with_token')])
-        ;
+            ->addMethodCall('setHttpClient', [new Reference('http_client_with_token')]);
     }
 }

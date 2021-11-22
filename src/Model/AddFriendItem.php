@@ -63,7 +63,7 @@ class AddFriendItem extends Model
 
     public function setAddSource(string $AddSource): void
     {
-        $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX.strtolower($AddSource);
+        $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX . strtolower($AddSource);
     }
 
     public function getAddWording(): string

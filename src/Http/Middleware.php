@@ -19,27 +19,32 @@ class Middleware
     public static function useragent(): callable
     {
         return \GuzzleHttp\Middleware::mapRequest(function (RequestInterface $request) {
-            return $request->withHeader('User-Agent', sprintf(
-                'QcloudIMSdk (%s %s; %s)) Client/%s PHP/%s',
-                \PHP_OS,
-                php_uname('r'),
-                php_uname('m'),
-                Constants::SDK_VERSION,
-                \PHP_VERSION
-            ));
+            return $request->withHeader(
+                'User-Agent',
+                sprintf(
+                    'QcloudIMSdk (%s %s; %s)) Client/%s PHP/%s',
+                    \PHP_OS,
+                    php_uname('r'),
+                    php_uname('m'),
+                    Constants::SDK_VERSION,
+                    \PHP_VERSION
+                )
+            );
         });
     }
 
     public static function auth(Token $token): callable
     {
         return \GuzzleHttp\Middleware::mapRequest(function (RequestInterface $request) use ($token) {
-            return $request->withUri(Uri::withQueryValues($request->getUri(), [
-                'sdkappid' => $token->getSdkAppId(),
-                'identifier' => $token->getIdentifier(),
-                'usersig' => (string) $token->get(),
-                'random' => (string) rand(1, 999999),
-                'contenttype' => 'json',
-            ]));
+            return $request->withUri(
+                Uri::withQueryValues($request->getUri(), [
+                    'sdkappid' => $token->getSdkAppId(),
+                    'identifier' => $token->getIdentifier(),
+                    'usersig' => (string)$token->get(),
+                    'random' => (string)rand(1, 999999),
+                    'contenttype' => 'json',
+                ])
+            );
         });
     }
 
@@ -67,16 +72,19 @@ class Middleware
                 ($exception instanceof ConnectException)
                 or ($response && $response->getStatusCode() >= 500)
             ) {
-                $logger->warning(sprintf(
-                    'Retrying %s %s %s/%s, %s',
-                    $request->getMethod(),
-                    $request->getUri(),
-                    $retries + 1,
-                    Constants::SDK_RETRY_MAX_RETRIES,
-                    $response ? 'status code: '.$response->getStatusCode() : $exception->getMessage()
-                ), [
-                    $request->getHeader('Host')[0],
-                ]);
+                $logger->warning(
+                    sprintf(
+                        'Retrying %s %s %s/%s, %s',
+                        $request->getMethod(),
+                        $request->getUri(),
+                        $retries + 1,
+                        Constants::SDK_RETRY_MAX_RETRIES,
+                        $response ? 'status code: ' . $response->getStatusCode() : $exception->getMessage()
+                    ),
+                    [
+                        $request->getHeader('Host')[0],
+                    ]
+                );
 
                 return true;
             }

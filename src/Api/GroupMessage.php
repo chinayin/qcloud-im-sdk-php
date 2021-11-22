@@ -19,7 +19,8 @@ class GroupMessage
     public function deleteGroupMsgBySender(string $groupId, string $accountId): bool
     {
         $r = $this->httpClient->postJson('group_open_http_svc/delete_group_msg_by_sender', [
-            'GroupId' => $groupId, 'Sender_Account' => $accountId,
+            'GroupId' => $groupId,
+            'Sender_Account' => $accountId,
         ]);
 
         return Constants::ACTION_STATUS_OK === $r['ActionStatus'];
@@ -32,7 +33,9 @@ class GroupMessage
     public function setUnreadMsgNum(string $groupId, string $accountId, int $unreadMsgNum): bool
     {
         $r = $this->httpClient->postJson('group_open_http_svc/set_unread_msg_num', [
-            'GroupId' => $groupId, 'Member_Account' => $accountId, 'UnreadMsgNum' => $unreadMsgNum,
+            'GroupId' => $groupId,
+            'Member_Account' => $accountId,
+            'UnreadMsgNum' => $unreadMsgNum,
         ]);
 
         return Constants::ACTION_STATUS_OK === $r['ActionStatus'];
@@ -47,7 +50,9 @@ class GroupMessage
     public function forbidSendMsg(string $groupId, array $membersAccount, int $shutUpTime = 60): bool
     {
         $r = $this->httpClient->postJson('group_open_http_svc/forbid_send_msg', [
-            'GroupId' => $groupId, 'Members_Account' => $membersAccount, 'ShutUpTime' => $shutUpTime,
+            'GroupId' => $groupId,
+            'Members_Account' => $membersAccount,
+            'ShutUpTime' => $shutUpTime,
         ]);
 
         return Constants::ACTION_STATUS_OK === $r['ActionStatus'];
@@ -72,7 +77,8 @@ class GroupMessage
     public function recallGroupMsg(string $groupId, array $msgSeqArray): array
     {
         $r = $this->httpClient->postJson('group_open_http_svc/group_msg_recall', [
-            'GroupId' => $groupId, 'MsgSeqList' => array_map(function ($v) {
+            'GroupId' => $groupId,
+            'MsgSeqList' => array_map(function ($v) {
                 return ['MsgSeq' => $v];
             }, $msgSeqArray),
         ]);
@@ -92,7 +98,9 @@ class GroupMessage
     public function getGroupMsg(string $groupId, int $reqMsgSeq, int $reqMsgNumber = 20): array
     {
         return $this->httpClient->postJson('group_open_http_svc/group_msg_get_simple', [
-            'GroupId' => $groupId, 'ReqMsgSeq' => $reqMsgSeq, 'ReqMsgNumber' => $reqMsgNumber,
+            'GroupId' => $groupId,
+            'ReqMsgSeq' => $reqMsgSeq,
+            'ReqMsgNumber' => $reqMsgNumber,
         ]);
     }
 

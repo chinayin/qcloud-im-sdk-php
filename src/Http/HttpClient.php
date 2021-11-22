@@ -34,13 +34,16 @@ class HttpClient implements HttpClientInterface
 
     public function postFile(string $uri, string $path, array $query = []): array
     {
-        return $this->client->post($uri, array_merge([
-            'multipart' => [
-                [
-                    'name' => 'media',
-                    'contents' => fopen($path, 'r'),
+        return $this->client->post(
+            $uri,
+            array_merge([
+                'multipart' => [
+                    [
+                        'name' => 'media',
+                        'contents' => fopen($path, 'r'),
+                    ],
                 ],
-            ],
-        ], compact('query')))->toArray();
+            ], compact('query'))
+        )->toArray();
     }
 }

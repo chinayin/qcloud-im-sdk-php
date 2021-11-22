@@ -15,7 +15,7 @@ class Token extends AbstractCache
     {
         $unique = md5("{$this->sdkAppId}__{$this->secret}__{$this->identifier}");
 
-        return md5('qcloudim.token.'.$unique);
+        return md5('qcloudim.token.' . $unique);
     }
 
     protected function getCacheExpire(): int

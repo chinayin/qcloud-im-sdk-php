@@ -6,7 +6,7 @@ class Model
 {
     public function toArray(): array
     {
-        return array_filter((array) $this, function ($v) {
+        return array_filter((array)$this, function ($v) {
             return null !== $v;
         });
     }
