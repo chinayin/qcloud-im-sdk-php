@@ -38,129 +38,81 @@ class ImportAddFriendItem extends Model
         return $this->To_Account;
     }
 
-    /**
-     * @param string $To_Account
-     */
     public function setToAccount(string $To_Account): void
     {
         $this->To_Account = $To_Account;
     }
 
-    /**
-     * @return string
-     */
     public function getRemark(): string
     {
         return $this->Remark;
     }
 
-    /**
-     * @param string $Remark
-     */
     public function setRemark(string $Remark): void
     {
         $this->Remark = $Remark;
     }
 
-    /**
-     * @return string
-     */
     public function getGroupName(): string
     {
         return $this->GroupName;
     }
 
-    /**
-     * @param string $GroupName
-     */
     public function setGroupName(string $GroupName): void
     {
         $this->GroupName = $GroupName;
     }
 
-    /**
-     * @return string
-     */
     public function getAddSource(): string
     {
         return $this->AddSource;
     }
 
-    /**
-     * @param string $AddSource
-     */
     public function setAddSource(string $AddSource): void
     {
         $this->AddSource = Constants::ADD_SOURCE_TYPE_PREFIX . strtolower($AddSource);
     }
 
-    /**
-     * @return string
-     */
     public function getAddWording(): string
     {
         return $this->AddWording;
     }
 
-    /**
-     * @param string $AddWording
-     */
     public function setAddWording(string $AddWording): void
     {
         $this->AddWording = $AddWording;
     }
 
-    /**
-     * @return int
-     */
     public function getRemarkTime(): int
     {
         return $this->RemarkTime;
     }
 
-    /**
-     * @param int $RemarkTime
-     */
     public function setRemarkTime(int $RemarkTime): void
     {
         $this->RemarkTime = $RemarkTime;
     }
 
-    /**
-     * @return int
-     */
     public function getAddTime(): int
     {
         return $this->AddTime;
     }
 
-    /**
-     * @param int $AddTime
-     */
     public function setAddTime(int $AddTime): void
     {
         $this->AddTime = $AddTime;
     }
 
-    /**
-     * @return array
-     */
     public function getCustomItem(): array
     {
         return $this->CustomItem;
     }
 
-    /**
-     * @param array $CustomItem
-     */
     public function setCustomItem(array $CustomItem): void
     {
         $this->CustomItem = $CustomItem;
     }
 
-    /**
-     * @param TagValueItem $item
-     */
     public function addCustomItem(TagValueItem $item): void
     {
         is_array($this->CustomItem) or $this->CustomItem = [];
@@ -168,12 +120,10 @@ class ImportAddFriendItem extends Model
     }
 
     /**
-     * @param string $key
-     * @param        $value
+     * @param $value
      */
     public function addCustomItemValue(string $key, $value): void
     {
         $this->addCustomItem(new TagValueItem($key, $value));
     }
-
 }
