@@ -103,7 +103,9 @@ class ModifyGroupItem extends Model
 
     public function addAppDefinedDataItem(KeyValueItem $item): void
     {
-        is_array($this->AppDefinedData) or $this->AppDefinedData = [];
+        if (!is_array($this->AppDefinedData)) {
+            $this->AppDefinedData = [];
+        }
         $this->AppDefinedData[] = $item;
     }
 

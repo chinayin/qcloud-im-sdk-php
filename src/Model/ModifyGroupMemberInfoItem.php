@@ -100,7 +100,9 @@ class ModifyGroupMemberInfoItem extends Model
 
     public function addAppMemberDefinedDataItem(KeyValueItem $item): void
     {
-        is_array($this->AppMemberDefinedData) or $this->AppMemberDefinedData = [];
+        if (!is_array($this->AppMemberDefinedData)) {
+            $this->AppMemberDefinedData = [];
+        }
         $this->AppMemberDefinedData[] = $item;
     }
 
