@@ -63,7 +63,7 @@
   "scripts": {
     "test": "vendor/bin/phpunit",
     "test-ci": "vendor/bin/phpunit --coverage-text",
-    "phpfix": "vendor/bin/php-cs-fixer fix -v",
+    "php-cs-fixer": "vendor/bin/php-cs-fixer fix -v",
     "phploc": "vendor/bin/phploc --exclude=vendor --exclude=tests ./",
     "phpcpd": "vendor/bin/phpcpd --exclude=vendor --exclude=tests ./",
     "phpstan": "vendor/bin/phpstan analyse",
