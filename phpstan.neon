@@ -3,14 +3,13 @@ includes:
 parameters:
     level: 5
     checkMissingIterableValueType: false
-    checkExplicitMixedMissingReturn: false
     checkFunctionNameCase: true
     reportUnmatchedIgnoredErrors: false
     checkGenericClassInNonGenericObjectType: false
     inferPrivatePropertyTypeFromConstructor: true
     paths:
         - src
-    excludes_analyse:
+    excludePaths:
         - src/Test/
     ignoreErrors:
         - '#Function __LOG_MESSAGE.* not found\.#'

@@ -60,11 +60,12 @@ class ChatMessage
     public function getChatMsg(
         string $fromAccountId,
         string $toAccountId,
-        int $minTime,
-        int $maxTime,
-        int $maxCnt,
+        int    $minTime,
+        int    $maxTime,
+        int    $maxCnt,
         string $lastMsgKey = ''
-    ): array {
+    ): array
+    {
         $p = [
             'From_Account' => $fromAccountId,
             'To_Account' => $toAccountId,
@@ -72,7 +73,9 @@ class ChatMessage
             'MaxTime' => $maxTime,
             'MaxCnt' => $maxCnt,
         ];
-        empty($lastMsgKey) or $p['LastMsgKey'] = $lastMsgKey;
+        if (!empty($lastMsgKey)) {
+            $p['LastMsgKey'] = $lastMsgKey;
+        }
 
         return $this->httpClient->postJson('openim/admin_getroammsg', $p);
     }

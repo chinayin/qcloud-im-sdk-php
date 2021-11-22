@@ -115,7 +115,9 @@ class ImportAddFriendItem extends Model
 
     public function addCustomItem(TagValueItem $item): void
     {
-        is_array($this->CustomItem) or $this->CustomItem = [];
+        if (!is_array($this->CustomItem)) {
+            $this->CustomItem = [];
+        }
         $this->CustomItem[] = $item;
     }
 

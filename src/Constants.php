@@ -28,9 +28,9 @@ class Constants
      * Gender_Type_Male：男性
      */
     public const TAG_PROFILE_IM_GENDER = 'Tag_Profile_IM_Gender';
-    /** @var int 生日 推荐用法：20190419 */
+    /** @var string 生日 推荐用法：20190419 */
     public const TAG_PROFILE_IM_BIRTHDAY = 'Tag_Profile_IM_BirthDay';
-    /** @var string    所在地
+    /** @var string 所在地
      * 长度不得超过16个字节，推荐用法如下：
      * App 本地定义一套数字到地名的映射关系 后台实际保存的是4个 uint32_t 类型的数字
      * 其中第一个 uint32_t 表示国家
@@ -47,22 +47,22 @@ class Constants
      * AllowType_Type_DenyAny：不允许任何人添加自己为好友
      */
     public const TAG_PROFILE_IM_ALLOWTYPE = 'Tag_Profile_IM_AllowType';
-    /** @var int 语言 */
+    /** @var string 语言 */
     public const TAG_PROFILE_IM_LANGUAGE = 'Tag_Profile_IM_Language';
     /** @var string 头像URL 长度不得超过500个字节 */
     public const TAG_PROFILE_IM_IMAGE = 'Tag_Profile_IM_Image';
-    /** @var int 消息设置 标志位：Bit0：置0表示接收消息，置1则不接收消息 */
+    /** @var string 消息设置 标志位：Bit0：置0表示接收消息，置1则不接收消息 */
     public const TAG_PROFILE_IM_MSGSETTINGS = 'Tag_Profile_IM_MsgSettings';
-    /** @var string    管理员禁止加好友标识
+    /** @var string 管理员禁止加好友标识
      * AdminForbid_Type_None：默认值，允许加好友
      * AdminForbid_Type_SendOut：禁止该用户发起加好友请求
      */
     public const TAG_PROFILE_IM_ADMINFORBIDTYPE = 'Tag_Profile_IM_AdminForbidType';
-    /** @var int    等级
+    /** @var string  等级
      * 通常一个 UINT-8 数据即可保存一个等级信息 您可以考虑拆分保存，从而实现多种角色的等级信息
      */
     public const TAG_PROFILE_IM_LEVEL = 'Tag_Profile_IM_Level';
-    /** @var int    角色
+    /** @var string  角色
      * 通常一个 UINT-8 数据即可保存一个角色信息 您可以考虑拆分保存，从而保存多种角色信息
      */
     public const TAG_PROFILE_IM_ROLE = 'Tag_Profile_IM_Role';

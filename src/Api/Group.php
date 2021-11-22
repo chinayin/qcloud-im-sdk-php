@@ -172,10 +172,11 @@ class Group
      */
     public function deleteGroupMember(
         string $groupId,
-        array $accountIds,
+        array  $accountIds,
         string $reason = '',
-        bool $silence = false
-    ): bool {
+        bool   $silence = false
+    ): bool
+    {
         if (count($accountIds) > 500) {
             throw new \InvalidArgumentException('AccountIds size limit exceeded.', -1);
         }
@@ -184,7 +185,9 @@ class Group
             'MemberToDel_Account' => $accountIds,
             'Silence' => $silence ? 1 : 0,
         ];
-        empty($reason) or $p['Reason'] = $reason;
+        if (!empty($reason)) {
+            $p['Reason'] = $reason;
+        }
         $r = $this->httpClient->postJson('group_open_http_svc/delete_group_member', $p);
 
         return Constants::ACTION_STATUS_OK === $r['ActionStatus'];
@@ -207,11 +210,12 @@ class Group
      * 获取群成员详细资料(分页).
      */
     public function getGroupMemberInfoByPage(
-        string $groupId,
-        int $offset,
-        int $limit = 100,
+        string                        $groupId,
+        int                           $offset,
+        int                           $limit = 100,
         GroupMemberInfoResponseFilter $filter = null
-    ): array {
+    ): array
+    {
         $p = ['GroupId' => $groupId, 'Offset' => $offset, 'Limit' => $limit];
         if (null !== $filter) {
             $p += $filter->toArray();
