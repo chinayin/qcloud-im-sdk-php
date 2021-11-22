@@ -25,6 +25,7 @@
     "php": ">=7.2",
     "ext-dom": "*",
     "ext-json": "*",
+    "ext-zlib": "*",
     "doctrine/collections": "^1.5",
     "guzzlehttp/guzzle": "^6.5|^7.0",
     "mockery/mockery": "^1.3",
