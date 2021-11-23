@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 if (!class_exists('PhpCsFixer\Config', true)) {
     fwrite(STDERR, "Your php-cs-version is outdated: please upgrade it.\n");
     die(16);
