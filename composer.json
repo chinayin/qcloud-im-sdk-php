@@ -55,8 +55,6 @@
     "preferred-install": "dist",
     "optimize-autoloader": true
   },
-  "prefer-stable": true,
-  "minimum-stability": "dev",
   "extra": {
   },
   "scripts": {
