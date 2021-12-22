@@ -73,7 +73,7 @@ class App extends ContainerBuilder
             $this->register('logger', $log);
         } elseif ($log) {
             $this->register('logger_handler', StreamHandler::class)
-                ->setArguments([$log['file'], $log['level'] ?? 'debug']);
+                ->setArguments([$log['file'], $log['level'] ?? 'info']);
             $this->registerMonolog();
         } else {
             $this->register('logger_handler', NullHandler::class);
