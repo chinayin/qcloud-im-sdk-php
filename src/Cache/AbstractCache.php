@@ -28,8 +28,5 @@ abstract class AbstractCache
 
     abstract protected function getCacheExpire(): int;
 
-    /**
-     * @return mixed
-     */
     abstract protected function getFromServer();
 }

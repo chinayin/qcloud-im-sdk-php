@@ -29,17 +29,11 @@ class KeyValueItem extends Model
         $this->Key = $Key;
     }
 
-    /**
-     * @return mixed
-     */
     public function getValue()
     {
         return $this->Value;
     }
 
-    /**
-     * @param mixed $Value
-     */
     public function setValue($Value): void
     {
         $this->Value = $Value;
