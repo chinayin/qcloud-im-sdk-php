@@ -2,11 +2,11 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    target-branch: "0.2"
+    target-branch: "1.x"
     schedule:
       interval: "monthly"
   - package-ecosystem: "composer"
     directory: "/"
-    target-branch: "0.2"
+    target-branch: "1.x"
     schedule:
       interval: "daily"
