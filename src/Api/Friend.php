@@ -61,28 +61,47 @@ class Friend
     /**
      * 拉取好友.
      *
-     * @param int $StartIndex 分页的起始位置
-     * @param int $StandardSequence 上次拉好友数据时返回的 StandardSequence，如果 StandardSequence 字段的值与后台一致，后台不会返回标配好友数据
-     * @param int $CustomSequence 上次拉好友数据时返回的 CustomSequence，如果 CustomSequence 字段的值与后台一致，后台不会返回自定义好友数据
+     * @param int $startIndex 分页的起始位置
+     * @param int $standardSequence 上次拉好友数据时返回的 StandardSequence，如果 StandardSequence 字段的值与后台一致，后台不会返回标配好友数据
+     * @param int $customSequence 上次拉好友数据时返回的 CustomSequence，如果 CustomSequence 字段的值与后台一致，后台不会返回自定义好友数据
      */
     public function get(
         string $fromAccountId,
-        int $StartIndex,
-        int $StandardSequence = 0,
-        int $CustomSequence = 0
+        int $startIndex,
+        int $standardSequence = 0,
+        int $customSequence = 0
     ): array {
         $p = [
             'From_Account' => $fromAccountId,
-            'StartIndex' => $StartIndex,
+            'StartIndex' => $startIndex,
         ];
-        if (!empty($StandardSequence)) {
-            $p['StandardSequence'] = $StandardSequence;
+        if (!empty($standardSequence)) {
+            $p['StandardSequence'] = $standardSequence;
         }
-        if (!empty($CustomSequence)) {
-            $p['CustomSequence'] = $CustomSequence;
+        if (!empty($customSequence)) {
+            $p['CustomSequence'] = $customSequence;
         }
 
         return $this->httpClient->postJson('sns/friend_get', $p);
+    }
+
+    /**
+     * 拉取指定好友.
+     *
+     * @param array $toAccountId 好友的 UserID 列表,建议每次请求的好友数不超过100，避免因数据量太大导致回包失败
+     */
+    public function getList(
+        string $fromAccountId,
+        array $toAccountId,
+        array $tags
+    ): array {
+        $p = [
+            'From_Account' => $fromAccountId,
+            'To_Account' => $toAccountId,
+            'TagList' => $tags,
+        ];
+
+        return $this->httpClient->postJson('sns/friend_get_list', $p);
     }
 
     /**

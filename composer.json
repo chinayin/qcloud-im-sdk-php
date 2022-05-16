@@ -1,6 +1,6 @@
 {
   "name": "chinayin/qcloud-im-sdk-php",
-  "description": "Qcloud IM SDK for PHP - 腾讯云IM SDK",
+  "description": "QCloud IM SDK for PHP - 腾讯云IM SDK",
   "type": "library",
   "license": "Apache-2.0",
   "keywords": [

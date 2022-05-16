@@ -127,6 +127,11 @@ class Constants
     /** @var string 双向校验好友关系 */
     public const FRIEND_CHECK_TYPE_BOTH = 'CheckResult_Type_Both';
 
+    /** @var string 单向校验黑名单关系 */
+    public const BLACK_CHECK_TYPE_SIGNLE = 'BlackCheckResult_Type_Single';
+    /** @var string 双向校验黑名单关系 */
+    public const BLACK_CHECK_TYPE_BOTH = 'BlackCheckResult_Type_Both';
+
     /** @var string 好友关系结果 */
     public const FRIEND_CHECKRESULT_TYPE_NO_RELATION = 'CheckResult_Type_NoRelation';
     public const FRIEND_CHECKRESULT_TYPE_A_WITH_B = 'CheckResult_Type_AWithB';

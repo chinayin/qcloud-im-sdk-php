@@ -69,7 +69,7 @@ class FriendBlacklist
     public function check(
         string $fromAccountId,
         array $toAccountIds,
-        string $checkType = Constants::FRIEND_CHECK_TYPE_BOTH
+        string $checkType = Constants::BLACK_CHECK_TYPE_BOTH
     ): array {
         return $this->httpClient->postJson('sns/black_list_check', [
             'From_Account' => $fromAccountId,
