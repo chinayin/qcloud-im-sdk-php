@@ -8,8 +8,8 @@ namespace QcloudIM;
 class Constants
 {
     /** @var string sdk版本号 */
-    public const SDK_VERSION = '0.2.6';
-    /** @var string 调用baseuri */
+    public const SDK_VERSION = '0.3.0';
+    /** @var string 调用base uri */
     public const SDK_BASE_URI = 'https://console.tim.qq.com/v4/';
     /** @var int 重试次数 */
     public const SDK_RETRY_MAX_RETRIES = 1;
@@ -204,4 +204,8 @@ class Constants
     public const MSG_PRIORITY_HIGH = 'High';
     public const MSG_PRIORITY_NORMAL = 'Normal';
     public const MSG_PRIORITY_LOW = 'Low';
+
+    /** @var string 机器人账号前缀 */
+    public const ROBOT_PREFIX = '@RBT#';
+
 }

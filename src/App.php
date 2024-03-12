@@ -18,6 +18,7 @@ use QcloudIM\Api\Group;
 use QcloudIM\Api\GroupMessage;
 use QcloudIM\Api\ImportGroup;
 use QcloudIM\Api\Profile;
+use QcloudIM\Api\Robot;
 use QcloudIM\Cache\Token;
 use QcloudIM\Http\ClientFactory;
 use QcloudIM\Http\HttpClient;
@@ -37,14 +38,15 @@ class App extends ContainerBuilder
      */
     private $apiServices = [
         'Account' => Account::class,
-        'Profile' => Profile::class,
+        'ChatMessage' => ChatMessage::class,
         'Friend' => Friend::class,
         'FriendBlacklist' => FriendBlacklist::class,
+        'GlobalConfig' => GlobalConfig::class,
         'Group' => Group::class,
         'GroupMessage' => GroupMessage::class,
-        'ChatMessage' => ChatMessage::class,
         'ImportGroup' => ImportGroup::class,
-        'GlobalConfig' => GlobalConfig::class,
+        'Profile' => Profile::class,
+        'Robot' => Robot::class,
     ];
 
     public function __construct(array $config)
@@ -84,7 +86,7 @@ class App extends ContainerBuilder
     private function registerMonolog(): void
     {
         $this->register('logger', Logger::class)
-            ->addArgument('QcloudIM')
+            ->addArgument('QCloudIM')
             ->addMethodCall('setTimezone', [new \DateTimeZone('PRC')])
             ->addMethodCall('pushHandler', [new Reference('logger_handler')]);
     }
