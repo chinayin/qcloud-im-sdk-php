@@ -26,7 +26,7 @@
     "ext-dom": "*",
     "ext-json": "*",
     "ext-zlib": "*",
-    "doctrine/collections": "^1.5",
+    "doctrine/collections": "^1.5 || ^2.0",
     "guzzlehttp/guzzle": "^6.5|^7.0",
     "mockery/mockery": "^1.3",
     "monolog/monolog": "^2.1 || ^3.0",
