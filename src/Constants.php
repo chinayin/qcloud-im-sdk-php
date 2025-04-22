@@ -207,5 +207,4 @@ class Constants
 
     /** @var string 机器人账号前缀 */
     public const ROBOT_PREFIX = '@RBT#';
-
 }

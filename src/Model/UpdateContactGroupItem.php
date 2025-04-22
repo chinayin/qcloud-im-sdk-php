@@ -10,7 +10,7 @@ class UpdateContactGroupItem extends Model
     /** @var int 必填    1 – 分组添加或删除会话 */
     public $UpdateType;
 
-    /** @var object 必填    分组维度增删会话 */
+    /** @var array 必填    分组维度增删会话 */
     public $UpdateGroup;
 
 
@@ -28,5 +28,4 @@ class UpdateContactGroupItem extends Model
     {
         $this->UpdateGroup = $UpdateGroup;
     }
-
 }

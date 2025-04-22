@@ -60,7 +60,7 @@
   "scripts": {
     "test": "vendor/bin/phpunit",
     "test-ci": "vendor/bin/phpunit --coverage-text",
-    "php-cs-fixer": "vendor/bin/php-cs-fixer fix -v",
+    "php-cs-fixer": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix -v",
     "phpstan": "vendor/bin/phpstan analyse",
     "travis": [
       "composer php-cs-fixer",
