@@ -18,6 +18,7 @@ use QcloudIM\Api\Group;
 use QcloudIM\Api\GroupMessage;
 use QcloudIM\Api\ImportGroup;
 use QcloudIM\Api\Profile;
+use QcloudIM\Api\RecentContact;
 use QcloudIM\Api\Robot;
 use QcloudIM\Cache\Token;
 use QcloudIM\Http\ClientFactory;
@@ -47,6 +48,7 @@ class App extends ContainerBuilder
         'ImportGroup' => ImportGroup::class,
         'Profile' => Profile::class,
         'Robot' => Robot::class,
+        'RecentContact' => RecentContact::class,
     ];
 
     public function __construct(array $config)
