@@ -31,7 +31,7 @@ class Robot
         if (empty($userId)) {
             throw new \InvalidArgumentException('Invalid Params UserId.', -1);
         }
-        if (!str_starts_with($userId, Constants::ROBOT_PREFIX)) {
+        if (strpos($userId, Constants::ROBOT_PREFIX) !== 0) {
             throw new \InvalidArgumentException('UserId must start with @RBT#.', -1);
         }
 
@@ -61,7 +61,7 @@ class Robot
         if (empty($userId)) {
             throw new \InvalidArgumentException('Invalid Params UserId.', -1);
         }
-        if (!str_starts_with($userId, Constants::ROBOT_PREFIX)) {
+        if (strpos($userId, Constants::ROBOT_PREFIX) !== 0) {
             throw new \InvalidArgumentException('UserId must start with @RBT#.', -1);
         }
 
