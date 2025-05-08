@@ -30,5 +30,6 @@
         <env name="SDK_APPID" value=""/>
         <env name="SDK_SECRET" value=""/>
         <env name="SDK_IDENTIFIER" value=""/>
+        <env name="SDK_USERSIG" value=""/>
     </php>
 </phpunit>

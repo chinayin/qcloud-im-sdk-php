@@ -13,19 +13,14 @@ class UpdateContactGroupItem extends Model
     /** @var array 必填    分组维度增删会话 */
     public $UpdateGroup;
 
-
-    public function setFromAccount(string $From_Account): void
+    public function __construct($From_Account)
     {
         $this->From_Account = $From_Account;
+        $this->UpdateType = 1;
     }
 
-    public function setUpdateType(int $UpdateType): void
+    public function setUpdateGroup(UpdateGroup $UpdateGroup): void
     {
-        $this->UpdateType = $UpdateType;
-    }
-
-    public function setUpdateGroup(array $UpdateGroup): void
-    {
-        $this->UpdateGroup = $UpdateGroup;
+        $this->UpdateGroup = $UpdateGroup->toArray();
     }
 }
