@@ -3,6 +3,7 @@
 namespace QcloudIM\Api;
 
 use QcloudIM\Constants;
+use QcloudIM\Model\CreateContactGroupItem;
 use QcloudIM\Model\GetContactGroupItem;
 use QcloudIM\Model\UpdateContactGroupItem;
 use QcloudIM\Traits\HttpClientTrait;
@@ -18,9 +19,9 @@ class RecentContact
      * 创建会话分组数据
      * https://cloud.tencent.com/document/product/269/85791
      */
-    public function createContactGroup(GetContactGroupItem $getContactGroupItem): array
+    public function createContactGroup(CreateContactGroupItem $createContactGroupItem): array
     {
-        $params = $getContactGroupItem->toArray();
+        $params = $createContactGroupItem->toArray();
         return $this->httpClient->postJson('recentcontact/get_contact_group', $params);
     }
 

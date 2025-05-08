@@ -4,7 +4,6 @@ namespace QcloudIM\Model;
 
 class GetContactGroupItem extends Model
 {
-    // {"From_Account":"USER_6116","StartIndex":0}
     /** @var string */
     public $From_Account;
     /** @var int */
