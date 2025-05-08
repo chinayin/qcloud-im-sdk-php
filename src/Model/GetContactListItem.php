@@ -2,8 +2,6 @@
 
 namespace QcloudIM\Model;
 
-use QcloudIM\Constants;
-
 class GetContactListItem extends Model
 {
     /**
@@ -42,10 +40,5 @@ class GetContactListItem extends Model
         $this->TopTimeStamp = $TopTimeStamp;
         $this->TopStartIndex = $TopStartIndex;
         $this->AssistFlags = 15;
-    }
-
-    public function getUrl()
-    {
-        return $this->Url;
     }
 }
