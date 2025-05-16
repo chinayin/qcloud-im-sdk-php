@@ -10,31 +10,20 @@ class OfflinePushInfo extends Model
     public $PushFlag;
     public $Title;
 
-    /**
-     * @return mixed
-     */
-    public function getTitle()
-    {
-        return $this->Title;
-    }
-
-    /**
-     * @param mixed $Title
-     * @return OfflinePushInfo
-     */
-    public function setTitle($Title)
-    {
-        $this->Title = $Title;
-        return $this;
-    }
     public $Desc;
     public $Ext;
 
+    /**
+     * @var array
+     */
     public $AndroidInfo;
+    /**
+     * @var array
+     */
     public $ApnsInfo;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getPushFlag()
     {
@@ -42,7 +31,7 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @param mixed $PushFlag
+     * @param int $PushFlag
      * @return OfflinePushInfo
      */
     public function setPushFlag($PushFlag)
@@ -52,7 +41,25 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @return mixed
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->Title;
+    }
+
+    /**
+     * @param string $Title
+     * @return OfflinePushInfo
+     */
+    public function setTitle($Title)
+    {
+        $this->Title = $Title;
+        return $this;
+    }
+
+    /**
+     * @return string
      */
     public function getDesc()
     {
@@ -60,7 +67,7 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @param mixed $Desc
+     * @param string $Desc
      * @return OfflinePushInfo
      */
     public function setDesc($Desc)
@@ -70,7 +77,7 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getExt()
     {
@@ -78,7 +85,7 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @param mixed $Ext
+     * @param string $Ext json
      * @return OfflinePushInfo
      */
     public function setExt($Ext)
@@ -88,7 +95,7 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getAndroidInfo()
     {
@@ -96,7 +103,7 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @param mixed $AndroidInfo
+     * @param array $AndroidInfo
      * @return OfflinePushInfo
      */
     public function setAndroidInfo(array $AndroidInfo)
@@ -106,7 +113,7 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getApnsInfo()
     {
@@ -114,7 +121,7 @@ class OfflinePushInfo extends Model
     }
 
     /**
-     * @param mixed $ApnsInfo
+     * @param array $ApnsInfo
      * @return OfflinePushInfo
      */
     public function setApnsInfo(array $ApnsInfo)
