@@ -14,6 +14,9 @@ class SendChatMsgItem extends Model
     public $MsgContent;
     /** @var string 消息来源帐号 */
     public $From_Account;
+    /** @var string 消息发送到帐号 */
+    public $To_Account;
+
     /** @var int 消息时间戳，UNIX 时间戳（单位：秒） */
     public $MsgTimeStamp;
 
@@ -86,6 +89,24 @@ class SendChatMsgItem extends Model
         return $this->From_Account;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getToAccount()
+    {
+        return $this->To_Account;
+    }
+
+    /**
+     * @param mixed $To_Account
+     * @return SendChatMsgItem
+     */
+    public function setToAccount($To_Account)
+    {
+        $this->To_Account = $To_Account;
+        return $this;
+    }
+
     public function setFromAccount(string $From_Account): void
     {
         $this->From_Account = $From_Account;
@@ -126,8 +147,8 @@ class SendChatMsgItem extends Model
         return $this->OfflinePushInfo;
     }
 
-    public function setOfflinePushInfo(array $OfflinePushInfo): void
+    public function setOfflinePushInfo(OfflinePushInfo $OfflinePushInfo): void
     {
-        $this->OfflinePushInfo = $OfflinePushInfo;
+        $this->OfflinePushInfo = $OfflinePushInfo->toArray();
     }
 }
