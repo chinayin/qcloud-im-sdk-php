@@ -3,12 +3,16 @@
 namespace QcloudIM\Tests\Feature\Api;
 
 use QcloudIM\Api\ChatMessage;
+use QcloudIM\Constants;
 use QcloudIM\Model\ImportChatMsgItem;
+use QcloudIM\Model\OfflinePushInfo;
 use QcloudIM\Model\SendChatMsgItem;
+use QcloudIM\Tests\Feature\SendRequestTrait;
 use QcloudIM\Tests\TestCase;
 
 class ChatMessageTest extends TestCase
 {
+    use SendRequestTrait;
     /**
      * @var ChatMessage
      */
@@ -28,7 +32,25 @@ class ChatMessageTest extends TestCase
         $fromAccountId = '';
         $toAccountId = '';
         $msg = new SendChatMsgItem();
-        $r = $this->chatMessage->sendMsg($fromAccountId, $toAccountId, $msg);
+        $msg->setFromAccount($fromAccountId);
+        $msg->setSyncOtherMachine(2);
+        $msg->setToAccount($toAccountId);
+        $msg->setMsgType(Constants::MSG_ELEMENT_TYPE_TEXT);
+
+        $msg->setMsgBody([
+            json_decode('{"MsgType":"TIMTextElem","MsgContent":{"Text":"hi, beauty"}}', true)
+        ]);
+
+        $off = new OfflinePushInfo();
+        $off->setPushFlag(OfflinePushInfo::PUSH_FLAG_0);
+        $off->setDesc('desc info');
+        $off->setTitle('title');
+        $off->setExt(json_encode(['conversationID' => 'c2c_' . $fromAccountId]));
+        $msg->setOfflinePushInfo($off);
+
+        //$r = $this->chatMessage->sendMsg($fromAccountId, $toAccountId, $msg);
+
+        $r = $this->sendRequest('/v4/openim/sendmsg', $msg);
         var_dump($r);
         $this->assertNotEmpty($r);
     }
