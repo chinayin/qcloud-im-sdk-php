@@ -18,6 +18,8 @@ class ModifyGroupItem extends Model
     public $MaxMemberCount;
     /** @var string 选填    申请加群处理方式。包含 FreeAccess（自由加入），NeedPermission（需要验证），DisableApply（禁止加群），不填默认为 NeedPermission（需要验证）仅当创建支持申请加群的 群组 时，该字段有效 */
     public $ApplyJoinOption;
+    /** @var string 选填    邀请加群处理方式，包含 FreeAccess （直接邀请用户进群，不需要审批等操作）， NeedPermission 需要群管理员或者群主审批， DisableInvite 不支持 SDK 邀请进群， 该选项 AVChatRoom 群类型不支持 */
+    public $InviteJoinOption;
     /** @var array 选填    群组维度的自定义字段，默认情况是没有的，需要开通，详情请参阅 自定义字段 */
     public $AppDefinedData;
 
@@ -89,6 +91,16 @@ class ModifyGroupItem extends Model
     public function setApplyJoinOption(string $ApplyJoinOption): void
     {
         $this->ApplyJoinOption = $ApplyJoinOption;
+    }
+
+    public function getInviteJoinOption(): string
+    {
+        return $this->InviteJoinOption;
+    }
+
+    public function setInviteJoinOption(string $InviteJoinOption): void
+    {
+        $this->InviteJoinOption = $InviteJoinOption;
     }
 
     public function getAppDefinedData(): array
